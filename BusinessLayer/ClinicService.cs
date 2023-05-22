@@ -33,5 +33,9 @@ namespace BusinessLayer
 		{
 			throw new NotImplementedException();
 		}
-	}
+		public Animal GetAnimalByChip(string chip)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

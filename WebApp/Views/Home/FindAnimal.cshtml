@@ -1,0 +1,12 @@
+﻿@{
+    ViewData["Title"] = "Find Animal by Microchip";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<form asp-controller="Home" asp-action="FindAnimal" method="post" >
+    <label>Chip Number:</label>
+    <input required type="text" name="model.microchip" />
+    <button value="submit">Find</button>
+</form>
+<!--cercare l'animale per microchip.vedere se nella lista di ricoveri(municipalvisit) c'è l'animale tramite isinhospital, visualizzare foto-->
