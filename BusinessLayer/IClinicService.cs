@@ -8,7 +8,9 @@ namespace BusinessLayer
 		IEnumerable<ClinicAnimal> GetClinicAnimals();
 		ClinicAnimal GetClinicAnimalById(int id);
 		IEnumerable<ClinicVisit> GetClinicVisitsById(int id);
-		bool CreateClinicAnimal();
+		Animal GetAnimalByChip(string chip);
+
+        bool CreateClinicAnimal();
 		bool DeleteClinicAnimal();
 
 

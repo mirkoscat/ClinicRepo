@@ -17,9 +17,15 @@ namespace WebApp.Controllers
 		{
 			return View();
 		}
+        public IActionResult FindAnimal()
+        {
+            return View();
+        }
 
-		public IActionResult Privacy()
+        [HttpPost]
+		public IActionResult FindAnimal(string chip)
 		{
+			//clinicservice.getanimalbychip(chip);
 			return View();
 		}
 
