@@ -21,6 +21,10 @@ namespace DataLayer
         public string CoatColor { get; set; } = String.Empty;
         public bool? HasMicrochip { get; set; }=false;
         public string? MicrochipNumber { get; set;}
+       
+        public string? OwnerName { get; set; } = String.Empty;
+      
+        public string? OwnerLastName { get; set; } = String.Empty;
 
     }
 }
