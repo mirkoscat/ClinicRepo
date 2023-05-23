@@ -8,9 +8,12 @@ namespace WebApp.Controllers
     public class ClinicController : Controller
     {
         private readonly IClinicService cs;
-        public ClinicController(IClinicService cs)
+        private readonly IMunicipalService ms;
+        public ClinicController(IClinicService cs, IMunicipalService ms)
         {
             this.cs = cs;
+            this.ms = ms;
+
         }
         // GET: ClinicController
         public ActionResult Index()
@@ -37,6 +40,7 @@ namespace WebApp.Controllers
         public ActionResult Create(IFormCollection collection,ClinicAnimal ca)
         {
             if (ModelState.IsValid) {
+                
                 var result = cs.CreateClinicAnimal(ca);
                 if (result != false)
                     return RedirectToAction(nameof(Index));
@@ -49,14 +53,26 @@ namespace WebApp.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult CreateMunAnimal(IFormCollection form)
+        public ActionResult CreateMunAnimal(MunicipalAnimal ma)
         {
+            if (ModelState.IsValid)
+            {
+
+                var result = ms.CreateMunicipalAnimal(ma);
+                if (result != false)
+                    return RedirectToAction(nameof(Index));
+            }
             return View();
         }
+		public ActionResult CADetails(int id)
+		{
+          //  lista delle visite dell'animale in ordine cronologico inverso
+         // var list= cs.GetClinicVisitsById(id);
+			return View();
+		}
 
-
-        // GET: ClinicController/Edit/5
-        public ActionResult Edit(int id)
+		// GET: ClinicController/Edit/5
+		public ActionResult Edit(int id)
         {
             return View();
         }

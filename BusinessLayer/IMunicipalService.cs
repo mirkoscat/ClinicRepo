@@ -11,7 +11,7 @@ namespace BusinessLayer
 	{
 		IEnumerable<MunicipalAnimal> GetMunicipalAnimals();
 		MunicipalAnimal GetMunicipalAnimalById(int id);
-		bool CreateMunicipalAnimal();
+		bool CreateMunicipalAnimal(MunicipalAnimal ma);
 		bool DeleteMunicipalAnimal();
 	}
 }

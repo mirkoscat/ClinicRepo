@@ -4,8 +4,25 @@
 <a asp-controller="Clinic" asp-action="Create" class="btn btn-primary">Create Clinic Animal</a>
 <a asp-controller="Clinic" asp-action="CreateMunAnimal" class="btn btn-primary">Create Municipal Animal</a>
 <h2>List of Clinic Animals</h2>
-@foreach (var a in Model)
-{
-	<p>@a.Name</p>
+<table class="table">
+	<thead>
+	<th>Name</th>
+	<th>Typology</th>
+	<th>Microchip?</th>
+	<th>Details</th>
 
-}
+	</thead>
+	<tbody>
+		@foreach (var a in Model)
+		{
+			<tr>
+				<td>@a.Name</td>
+				<td>@a.Typology</td>
+				<td>@a.HasMicrochip</td>
+				@*<td><a asp-controller="Clinic" asp-action="CADetails" asp-route-id="@a.Id">Details</a></td>*@
+			</tr>
+
+
+		}
+	</tbody>
+</table>
