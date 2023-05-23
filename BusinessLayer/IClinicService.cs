@@ -11,7 +11,7 @@ namespace BusinessLayer
 		Animal GetAnimalByChip(string chip);
 
         bool CreateClinicAnimal(ClinicAnimal ca);
-		bool DeleteClinicAnimal();
+		bool DeleteClinicAnimal(int id);
 
 
 	}

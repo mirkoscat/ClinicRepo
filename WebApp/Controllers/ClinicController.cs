@@ -15,7 +15,8 @@ namespace WebApp.Controllers
         // GET: ClinicController
         public ActionResult Index()
         {
-            return View();
+            var list= cs.GetClinicAnimals();
+            return View(list);
         }
 
         // GET: ClinicController/Details/5
@@ -43,6 +44,16 @@ namespace WebApp.Controllers
               
            return View(ca);
         }
+        public ActionResult CreateMunAnimal()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult CreateMunAnimal(IFormCollection form)
+        {
+            return View();
+        }
+
 
         // GET: ClinicController/Edit/5
         public ActionResult Edit(int id)

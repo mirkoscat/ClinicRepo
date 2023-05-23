@@ -9,10 +9,6 @@ namespace DataLayer
 {
 	public class ClinicAnimal :Animal
 	{
-		[Required]
-        public string OwnerName { get; set; }
-        [Required]
-        public string OwnerLastName { get; set; } = String.Empty;
 		public ICollection<ClinicVisit> ClinicVisits { get; set; } = new List<ClinicVisit>();
 
 
