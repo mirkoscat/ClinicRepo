@@ -1,0 +1,9 @@
+﻿@using DataLayer
+@model IEnumerable<ClinicVisit>
+
+	
+	@foreach(var c in Model){
+	<p>@c.ExamTypology</p>
+	<p>@c.TreatmentDescription</p>
+	<p>@c.VisitDate</p>
+	}
