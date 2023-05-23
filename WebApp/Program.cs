@@ -1,3 +1,4 @@
+using DataLayer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using WebApp.Data;
@@ -9,7 +10,7 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 var myConnString = builder.Configuration.GetConnectionString("DataLayerConnection") ?? throw new InvalidOperationException("Connection string 'DataLayerConnection' not found.");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 	options.UseSqlServer(connectionString))
-	.AddDbContext<ApplicationDbContext>(options =>
+	.AddDbContext<DataDbContext>(options =>
 	options.UseSqlServer(myConnString));
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
