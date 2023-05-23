@@ -9,9 +9,26 @@ namespace BusinessLayer
 {
 	public class ClinicService : IClinicService
 	{
-		public bool CreateClinicAnimal()
+		private readonly DataDbContext db;
+        public ClinicService(DataDbContext db)
+        {
+            this.db = db;
+        }
+        public bool CreateClinicAnimal(ClinicAnimal ca)
 		{
-			throw new NotImplementedException();
+			db.ClinicAnimals.Add(new ClinicAnimal { 
+			Name=ca.Name,
+			Typology=ca.Typology,
+			BirthDate=ca.BirthDate,
+			RegistrationDate=ca.RegistrationDate,
+			CoatColor=ca.CoatColor,
+			HasMicrochip=ca.HasMicrochip,
+			MicrochipNumber=ca.MicrochipNumber,
+			OwnerName=ca.OwnerName,
+			OwnerLastName=ca.OwnerLastName
+			});
+			db.SaveChanges();
+			return true;
 		}
 
 		public bool DeleteClinicAnimal()
