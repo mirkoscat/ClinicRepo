@@ -1,7 +1,10 @@
-﻿using BusinessLayer;
+﻿
+using System;
+using BusinessLayer;
 using DataLayer;
-using Microsoft.AspNetCore.Http;
+
 using Microsoft.AspNetCore.Mvc;
+
 
 namespace WebApp.Controllers
 {
@@ -9,6 +12,7 @@ namespace WebApp.Controllers
     {
         private readonly IClinicService cs;
         private readonly IMunicipalService ms;
+       
         public ClinicController(IClinicService cs, IMunicipalService ms)
         {
             this.cs = cs;
@@ -40,7 +44,7 @@ namespace WebApp.Controllers
         public ActionResult Create(IFormCollection collection,ClinicAnimal ca)
         {
             if (ModelState.IsValid) {
-                
+               
                 var result = cs.CreateClinicAnimal(ca);
                 if (result != false)
                     return RedirectToAction(nameof(Index));
@@ -53,16 +57,16 @@ namespace WebApp.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult CreateMunAnimal(MunicipalAnimal ma)
+        public ActionResult CreateMunAnimal(MunicipalAnimal ma,IFormFile formFile)
         {
-            if (ModelState.IsValid)
-            {
-
-                var result = ms.CreateMunicipalAnimal(ma);
-                if (result != false)
-                    return RedirectToAction(nameof(Index));
-            }
-            return View();
+                if (ModelState.IsValid)
+                {
+                
+                    var result = ms.CreateMunicipalAnimal(ma);
+                    if (result != false)
+                        return RedirectToAction(nameof(Index));
+                }
+            return View(ma);
         }
 		public ActionResult CADetails(int id)
 		{

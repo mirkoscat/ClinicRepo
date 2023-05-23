@@ -23,9 +23,12 @@ namespace BusinessLayer
                 BirthDate = ca.BirthDate,
                 RegistrationDate = ca.RegistrationDate,
                 CoatColor = ca.CoatColor,
+                Picture=ca.Picture,
                 RecoveryStart = ca.RecoveryStart,
                 RecoveryEnd = ca.RecoveryEnd,
-                IsInHospital = ca.IsInHospital
+                IsInHospital = ca.IsInHospital,
+                MicrochipNumber = ca.MicrochipNumber,
+                HasMicrochip= ca.HasMicrochip,
               
             });
             db.SaveChanges();
