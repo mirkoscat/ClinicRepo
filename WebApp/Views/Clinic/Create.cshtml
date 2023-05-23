@@ -49,15 +49,12 @@
                 </div>
                 <span asp-validation-for="HasMicrochip" class="text-danger"></span>
             </div>
-
-          
+            <div id="showthings" style="display: none;">
                 <div class="form-group">
                     <label asp-for="MicrochipNumber" class="control-label"></label>
                     <input asp-for="MicrochipNumber" class="form-control" />
                     <span asp-validation-for="MicrochipNumber" class="text-danger"></span>
                 </div>
-            
-            
             <div class="form-group">
                 <label asp-for="OwnerName" class="control-label"></label>
                 <input asp-for="OwnerName" class="form-control" />
@@ -67,6 +64,7 @@
                 <label asp-for="OwnerLastName" class="control-label"></label>
                 <input asp-for="OwnerLastName" class="form-control" />
                 <span asp-validation-for="OwnerLastName" class="text-danger"></span>
+            </div>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
@@ -80,5 +78,17 @@
 </div>
 
 @section Scripts {
+    <script>
+        var hasMicrochipCheckbox = document.getElementById("HasMicrochip");
+        var showDiv = document.getElementById("showthings");
+
+        hasMicrochipCheckbox.addEventListener("click", function () {
+            if (hasMicrochipCheckbox.checked) {
+                showDiv.style.display = "block";  
+            } else {
+                showDiv.style.display = "none";  
+            }
+        });
+    </script>
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
