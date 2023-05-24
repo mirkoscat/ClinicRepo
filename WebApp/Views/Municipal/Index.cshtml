@@ -1,0 +1,10 @@
+﻿@using DataLayer;
+
+@model IEnumerable<MunicipalAnimal>
+
+<a asp-controller="Municipal" asp-action="CreateMunAnimal" class="btn btn-primary">Create Municipal Animal</a>
+
+@foreach(var a in Model){
+	<p>@a.Name</p>
+
+}
