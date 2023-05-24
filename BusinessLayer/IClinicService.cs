@@ -13,6 +13,8 @@ namespace BusinessLayer
         bool CreateClinicAnimal(ClinicAnimal ca);
 		bool DeleteClinicAnimal(int id);
 
+		bool CreateClinicVisit(int id, ClinicVisit cv);
+		
 
 	}
 }

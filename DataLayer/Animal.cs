@@ -19,7 +19,6 @@ namespace DataLayer
         public DateTime RegistrationDate { get; set;}
         [Required]
         public string CoatColor { get; set; } = String.Empty;
-        public Owner? Owner { get; set; }
 
         public bool? HasMicrochip { get; set; }=false;
         public string? MicrochipNumber { get; set;}

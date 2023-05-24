@@ -18,37 +18,42 @@ namespace BusinessLayer
         public bool CreateClinicAnimal(ClinicAnimal ca)
 		{
 			db.Animals.Add(ca);
-			
 			db.SaveChanges();
 			return true;
 		}
 
 		public bool DeleteClinicAnimal(int id)
         { 
-			var animal= db.ClinicAnimals.FirstOrDefault(c => c.Id==id);
-			db.ClinicAnimals.Remove(animal);
+			var animal= db.Animals.FirstOrDefault(c => c.Id==id);
+			db.Animals.Remove(animal);
 			db.SaveChanges();
 			return true;
 
 		}
 
-		public ClinicAnimal GetClinicAnimalById(int id)
-		{
-			throw new NotImplementedException();
-		}
-
-		public IEnumerable<ClinicAnimal> GetClinicAnimals() => db.Animals.Select(c=> new ClinicAnimal {
-		Name = c.Name,Typology=c.Typology, BirthDate=c.BirthDate,RegistrationDate=c.RegistrationDate,
-		CoatColor=c.CoatColor, HasMicrochip=c.HasMicrochip, MicrochipNumber=c.MicrochipNumber,Owner=c.Owner
-		
-		});
-		public IEnumerable<ClinicVisit> GetClinicVisitsById(int id)
-		{
-			throw new NotImplementedException();
-		}
-		public Animal GetAnimalByChip(string chip)
+		public ClinicAnimal GetClinicAnimalById(int id) => db.ClinicAnimals.Single(x=>x.Id==id);
+        public IEnumerable<ClinicAnimal> GetClinicAnimals() => db.ClinicAnimals.ToList();
+        public IEnumerable<ClinicVisit> GetClinicVisitsById(int id)
         {
-            throw new NotImplementedException();
+			var animal = db.ClinicAnimals.Include(a => a.ClinicVisits).FirstOrDefault(a => a.Id == id);
+
+			if (animal != null)
+			{
+				var visits = animal.ClinicVisits.ToList();
+				return visits;
+			}
+
+			return Enumerable.Empty<ClinicVisit>();
+		}
+        
+        public Animal GetAnimalByChip(string chip) => db.Animals.FirstOrDefault(x=>x.MicrochipNumber==chip);
+
+        public bool CreateClinicVisit(int id,ClinicVisit cv)
+        {
+			var animal = db.ClinicAnimals.Single(x=>x.Id==id);
+			animal.ClinicVisits.Add(cv);	
+			db.SaveChanges();
+			return true;
         }
     }
 }
