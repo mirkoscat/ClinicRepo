@@ -17,7 +17,7 @@ namespace WebApp.Models
       
         public DateTime RecoveryEnd { get; set; }
       
-        public IFormFile? Picture { get; set; }
+        public IFormFile Picture { get; set; }
        
         public bool IsInHospital { get; set; } = false;
     }

@@ -20,22 +20,28 @@ namespace WebApp.Controllers
 		{
 			return View();
 		}
-        public IActionResult FindAnimal()
+        public IActionResult FindAnimal(string? id)
         {
+			if (id != null) {
+				
+			var animal=cs.GetAnimalByChip(id);
+			return View(animal);
+            }
             return View();
+           
         }
 
-        [HttpPost]
-		public IActionResult FindAnimal(string chip)
-		{
-			var animal=cs.GetAnimalByChip(chip);
-			return View(animal);
-		}
+  //      [HttpPost]
+		//public IActionResult FindAnimal(string chip)
+		//{
+		//	var animal=cs.GetAnimalByChip(chip);
+		//	return RedirectToAction("FindAnimal",animal.Id);
+		//}
 
-		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-		public IActionResult Error()
-		{
-			return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-		}
+		//[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+		//public IActionResult Error()
+		//{
+		//	return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+		//}
 	}
 }
