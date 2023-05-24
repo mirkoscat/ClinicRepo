@@ -2,6 +2,7 @@
 using DataLayer;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using NuGet.Protocol;
 using WebApp.Models;
 
 namespace WebApp.Controllers
@@ -14,11 +15,24 @@ namespace WebApp.Controllers
         {
             this.ms = ms;
         }
-        // GET: MunicipalController
-        public ActionResult Index()
+		// GET: MunicipalController
+		public ActionResult Index()
+		{
+			var list = ms.GetMunicipalAnimals();
+			return View(list);
+		}
+		public ActionResult NewMunicipalVisit()
+		{
+			//var list = ms.GetMunicipalAnimals().Where(x=>x.IsInHospital);
+			return View();
+		}
+		public IActionResult GetImage(int id)
         {
-            var list=ms.GetMunicipalAnimals();
-            return View(list);
+            var img = ms.GetImageById(id);
+
+			// trasformare l'immagine in file 
+			// per restituirla al browser
+			return File(img.Data,img.Extension);
         }
 
         // GET: MunicipalController/Details/5
@@ -59,7 +73,8 @@ namespace WebApp.Controllers
                     RecoveryStart = ma.RecoveryStart,
                     RecoveryEnd = ma.RecoveryEnd,
                     IsInHospital = ma.IsInHospital,
-                    Picture = foto
+                    Picture = foto,
+                    FileExtension=ma.Picture.ContentType
 
                 };
 

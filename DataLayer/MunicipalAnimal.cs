@@ -14,9 +14,11 @@ namespace DataLayer
         [Required]
         public DateTime RecoveryEnd { get; set;}
         [Required]
-        public byte[] Picture { get; set; }
+        public byte[]? Picture { get; set; }
+        public string? FileExtension { get; set; }
         [Required]
 		public bool IsInHospital { get; set; }=false;
+        
 		public ICollection<MunicipalVisit> MunicipalVisits { get; set; } = new List<MunicipalVisit>();
 
 

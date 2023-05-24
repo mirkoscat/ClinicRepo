@@ -1,12 +1,24 @@
-﻿@{
+﻿@using DataLayer
+@model Animal
+@{
     ViewData["Title"] = "Find Animal by Microchip";
 }
 
 <h1>@ViewData["Title"]</h1>
 
-<form asp-controller="Home" asp-action="FindAnimal" method="post" >
+<form asp-controller="Home" asp-action="FindAnimal" >
     <label>Chip Number:</label>
-    <input required type="text" name="model.microchip" />
+    <input required type="text" name="id" />
     <button value="submit">Find</button>
 </form>
+@if (Model != null)
+{
+    
+    <p>@Model.Name</p>
+}
+else
+{
+    
+<p>No data </p>
+}
 <!--cercare l'animale per microchip.vedere se nella lista di ricoveri(municipalvisit) c'è l'animale tramite isinhospital, visualizzare foto-->
