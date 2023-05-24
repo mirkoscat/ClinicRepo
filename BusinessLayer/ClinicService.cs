@@ -4,7 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DataLayer;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace BusinessLayer
 {
@@ -54,6 +56,13 @@ namespace BusinessLayer
 			animal.ClinicVisits.Add(cv);	
 			db.SaveChanges();
 			return true;
+        }
+        public void Upload(int id, IFormFile image)
+        {
+			var img = image;
+			var animal=db.MunicipalAnimals.Single(x => x.Id == id);
+			animal.Picture = img;
+            db.SaveChanges();
         }
     }
 }
