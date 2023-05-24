@@ -14,23 +14,10 @@ namespace BusinessLayer
         {
             this.db = db;
         }
-        public bool CreateMunicipalAnimal(MunicipalAnimal ca)
+        public bool CreateMunicipalAnimal(MunicipalAnimal ma)
         {
-            db.Animals.Add(new MunicipalAnimal
-            {
-                Name = ca.Name,
-                Typology = ca.Typology,
-                BirthDate = ca.BirthDate,
-                RegistrationDate = ca.RegistrationDate,
-                CoatColor = ca.CoatColor,
-                Picture=ca.Picture,
-                RecoveryStart = ca.RecoveryStart,
-                RecoveryEnd = ca.RecoveryEnd,
-                IsInHospital = ca.IsInHospital,
-                MicrochipNumber = ca.MicrochipNumber,
-                HasMicrochip= ca.HasMicrochip,
-              
-            });
+            db.Animals.Add(ma);
+           
             db.SaveChanges();
             return true;
         }

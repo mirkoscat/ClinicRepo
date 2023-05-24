@@ -17,17 +17,8 @@ namespace BusinessLayer
         }
         public bool CreateClinicAnimal(ClinicAnimal ca)
 		{
-			db.Animals.Add(new ClinicAnimal { 
-			Name=ca.Name,
-			Typology=ca.Typology,
-			BirthDate=ca.BirthDate,
-			RegistrationDate=ca.RegistrationDate,
-			CoatColor=ca.CoatColor,
-			HasMicrochip=ca.HasMicrochip,
-			MicrochipNumber=ca.MicrochipNumber,
-			OwnerName=ca.OwnerName,
-			OwnerLastName=ca.OwnerLastName
-			});
+			db.Animals.Add(ca);
+			
 			db.SaveChanges();
 			return true;
 		}
@@ -48,8 +39,8 @@ namespace BusinessLayer
 
 		public IEnumerable<ClinicAnimal> GetClinicAnimals() => db.Animals.Select(c=> new ClinicAnimal {
 		Name = c.Name,Typology=c.Typology, BirthDate=c.BirthDate,RegistrationDate=c.RegistrationDate,
-		CoatColor=c.CoatColor, HasMicrochip=c.HasMicrochip, MicrochipNumber=c.MicrochipNumber,
-		OwnerName=c.OwnerName,OwnerLastName=c.OwnerLastName
+		CoatColor=c.CoatColor, HasMicrochip=c.HasMicrochip, MicrochipNumber=c.MicrochipNumber,Owner=c.Owner
+		
 		});
 		public IEnumerable<ClinicVisit> GetClinicVisitsById(int id)
 		{
