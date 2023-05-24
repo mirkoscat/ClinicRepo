@@ -13,19 +13,29 @@
         <form asp-action="CreateMunAnimal" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="RecoveryStart" class="control-label"></label>
-                <input asp-for="RecoveryStart" class="form-control" />
-                <span asp-validation-for="RecoveryStart" class="text-danger"></span>
+                <label asp-for="@Model.Name" class="control-label"></label>
+                <input asp-for="@Model.Name" class="form-control" />
+                <span asp-validation-for="@Model.Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="RecoveryEnd" class="control-label"></label>
-                <input asp-for="RecoveryEnd" class="form-control" />
-                <span asp-validation-for="RecoveryEnd" class="text-danger"></span>
+                <label asp-for="@Model.Typology" class="control-label"></label>
+                <input asp-for="@Model.Typology" class="form-control" />
+                <span asp-validation-for="@Model.Typology" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Picture" class="control-label"></label>
-                <input type="file" asp-for="Picture" accept=".jpg,.png,.gif,.svg,.jpeg" name="file" class="form-control" />
-                <span asp-validation-for="Picture" class="text-danger"></span>
+                <label asp-for="@Model.RecoveryStart" class="control-label"></label>
+                <input asp-for="@Model.RecoveryStart" class="form-control" />
+                <span asp-validation-for="@Model.RecoveryStart" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.RecoveryEnd" class="control-label"></label>
+                <input asp-for="@Model.RecoveryEnd" class="form-control" />
+                <span asp-validation-for="@Model.RecoveryEnd" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Picture" class="control-label"></label>
+                <input type="file" asp-for="@Model.Picture"  class="form-control" />
+                <span asp-validation-for="@Model.Picture" class="text-danger"></span>
             </div>
             <div class="form-group form-check">
                 <label class="form-check-label">

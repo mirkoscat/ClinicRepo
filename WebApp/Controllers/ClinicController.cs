@@ -56,17 +56,16 @@ namespace WebApp.Controllers
 		}
 		public ActionResult CreateMunAnimal()
 		{
-            var ma = new UploadMunicipalAnimal();
-            return View(ma);
+            
+            return View();
         }
         [HttpPost]
         public ActionResult CreateMunAnimal(UploadMunicipalAnimal ma)
         {
             if (ModelState.IsValid)
             {
-               
-                if (ma.Picture != null && ma.Picture.Length > 0)
-                {
+
+				byte[] foto;
                     using (var memoryStream = new MemoryStream())
                     {
                         ma.Picture.CopyTo(memoryStream);
@@ -74,10 +73,12 @@ namespace WebApp.Controllers
 
                         var fieldName = $"Picture{fileCounter++}"; 
 
-                        ma.Picture = new FormFile(memoryStream, 0, memoryStream.Length, fieldName, ma.Picture.FileName);
+                        foto= memoryStream.ToArray();
+
+
                     }
-                }
-                cs.Upload(ma.Id, ma.Picture);
+                
+               // cs.Upload(ma.Id, ma.Picture);
 
 
                 var municipalAnimal = new MunicipalAnimal
@@ -87,7 +88,9 @@ namespace WebApp.Controllers
                     CoatColor = ma.CoatColor,
                     RecoveryStart = ma.RecoveryStart,
                     RecoveryEnd = ma.RecoveryEnd,
-					IsInHospital = ma.IsInHospital
+					IsInHospital = ma.IsInHospital,
+					Picture=foto
+					
                 };
 
                 var result = ms.CreateMunicipalAnimal(municipalAnimal);
