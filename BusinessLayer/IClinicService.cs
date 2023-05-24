@@ -1,5 +1,6 @@
 ﻿
 using DataLayer;
+using Microsoft.AspNetCore.Http;
 
 namespace BusinessLayer
 {
@@ -14,6 +15,7 @@ namespace BusinessLayer
 		bool DeleteClinicAnimal(int id);
 
 		bool CreateClinicVisit(int id, ClinicVisit cv);
+		void Upload(int id,IFormFile file);
 		
 
 	}

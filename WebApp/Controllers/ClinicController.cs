@@ -12,8 +12,9 @@ namespace WebApp.Controllers
 	{
 		private readonly IClinicService cs;
 		private readonly IMunicipalService ms;
+        private static int fileCounter = 0;
 
-		public ClinicController(IClinicService cs, IMunicipalService ms)
+        public ClinicController(IClinicService cs, IMunicipalService ms)
 		{
 			this.cs = cs;
 			this.ms = ms;
@@ -55,21 +56,52 @@ namespace WebApp.Controllers
 		}
 		public ActionResult CreateMunAnimal()
 		{
-			return View();
-		}
-		[HttpPost]
-		public ActionResult CreateMunAnimal(MunicipalAnimal ma, IFormFile formFile)
-		{//modificare
-			if (ModelState.IsValid)
-			{
+            var ma = new UploadMunicipalAnimal();
+            return View(ma);
+        }
+        [HttpPost]
+        public ActionResult CreateMunAnimal(UploadMunicipalAnimal ma)
+        {
+            if (ModelState.IsValid)
+            {
+               
+                if (ma.Picture != null && ma.Picture.Length > 0)
+                {
+                    using (var memoryStream = new MemoryStream())
+                    {
+                        ma.Picture.CopyTo(memoryStream);
+                        memoryStream.Seek(0, SeekOrigin.Begin); // Riavvolge lo stream all'inizio
 
-				var result = ms.CreateMunicipalAnimal(ma);
-				if (result != false)
-					return RedirectToAction(nameof(Index));
-			}
-			return View(ma);
-		}
-		public ActionResult CADetails(int id)
+                        var fieldName = $"Picture{fileCounter++}"; 
+
+                        ma.Picture = new FormFile(memoryStream, 0, memoryStream.Length, fieldName, ma.Picture.FileName);
+                    }
+                }
+                cs.Upload(ma.Id, ma.Picture);
+
+
+                var municipalAnimal = new MunicipalAnimal
+                {
+                    Name = ma.Name,
+                    Typology = ma.Typology,
+                    CoatColor = ma.CoatColor,
+                    RecoveryStart = ma.RecoveryStart,
+                    RecoveryEnd = ma.RecoveryEnd,
+					IsInHospital = ma.IsInHospital
+                };
+
+                var result = ms.CreateMunicipalAnimal(municipalAnimal);
+                if (result)
+                    return RedirectToAction(nameof(Index));
+            }
+
+            return View(ma);
+        }
+
+
+
+
+        public ActionResult CADetails(int id)
 		{
 			var animal=cs.GetClinicAnimalById(id);
 			var visite= cs.GetClinicVisitsById(id).ToList();
@@ -89,7 +121,7 @@ namespace WebApp.Controllers
 			{
 				ClinicAnimal = animal,
 				ClinicVisit= new ClinicVisit() { 
-				VisitDate=DateTime.Now
+				VisitDate=DateTime.Today
 				}
 
 			};
