@@ -27,14 +27,8 @@ namespace BusinessLayer
             throw new NotImplementedException();
         }
 
-        public MunicipalAnimal GetMunicipalAnimalById(int id)
-        {
-            throw new NotImplementedException();
-        }
+        public MunicipalAnimal GetMunicipalAnimalById(int id) => db.MunicipalAnimals.Single(x=>x.Id==id);
 
-        public IEnumerable<MunicipalAnimal> GetMunicipalAnimals()
-        {
-            throw new NotImplementedException();
-        }
+        public IEnumerable<MunicipalAnimal> GetMunicipalAnimals() => db.MunicipalAnimals.ToList();
     }
 }

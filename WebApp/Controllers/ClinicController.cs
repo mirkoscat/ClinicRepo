@@ -12,7 +12,7 @@ namespace WebApp.Controllers
 	{
 		private readonly IClinicService cs;
 		private readonly IMunicipalService ms;
-        private static int fileCounter = 0;
+
 
         public ClinicController(IClinicService cs, IMunicipalService ms)
 		{
@@ -54,55 +54,7 @@ namespace WebApp.Controllers
 
 			return View(ca);
 		}
-		public ActionResult CreateMunAnimal()
-		{
-            
-            return View();
-        }
-        [HttpPost]
-        public ActionResult CreateMunAnimal(UploadMunicipalAnimal ma)
-        {
-            if (ModelState.IsValid)
-            {
-
-				byte[] foto;
-                    using (var memoryStream = new MemoryStream())
-                    {
-                        ma.Picture.CopyTo(memoryStream);
-                        memoryStream.Seek(0, SeekOrigin.Begin); // Riavvolge lo stream all'inizio
-
-                        var fieldName = $"Picture{fileCounter++}"; 
-
-                        foto= memoryStream.ToArray();
-
-
-                    }
-                
-               // cs.Upload(ma.Id, ma.Picture);
-
-
-                var municipalAnimal = new MunicipalAnimal
-                {
-                    Name = ma.Name,
-                    Typology = ma.Typology,
-                    CoatColor = ma.CoatColor,
-                    RecoveryStart = ma.RecoveryStart,
-                    RecoveryEnd = ma.RecoveryEnd,
-					IsInHospital = ma.IsInHospital,
-					Picture=foto
-					
-                };
-
-                var result = ms.CreateMunicipalAnimal(municipalAnimal);
-                if (result)
-                    return RedirectToAction(nameof(Index));
-            }
-
-            return View(ma);
-        }
-
-
-
+		
 
         public ActionResult CADetails(int id)
 		{
