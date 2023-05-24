@@ -2,14 +2,17 @@
 
 @model IEnumerable<ClinicAnimal>
 <a asp-controller="Clinic" asp-action="Create" class="btn btn-primary">Create Clinic Animal</a>
-<a asp-controller="Clinic" asp-action="CreateMunAnimal" class="btn btn-primary">Create Municipal Animal</a>
-<h2>List of Clinic Animals</h2>
+@*<a asp-controller="Clinic" asp-action="CreateMunAnimal" class="btn btn-primary">Create Municipal Animal</a>
+*@<h2>List of Clinic Animals</h2>
 <table class="table">
 	<thead>
 	<th>Name</th>
 	<th>Typology</th>
 	<th>Microchip?</th>
-	<th>Details</th>
+	<th>Microchip Number</th>
+	<th>Owner Name</th>
+	<th></th>
+	
 
 	</thead>
 	<tbody>
@@ -19,7 +22,15 @@
 				<td>@a.Name</td>
 				<td>@a.Typology</td>
 				<td>@a.HasMicrochip</td>
-				@*<td><a asp-controller="Clinic" asp-action="CADetails" asp-route-id="@a.Id">Details</a></td>*@
+				<td>@a.MicrochipNumber</td>
+				<td>@a.OwnerName</td>
+
+
+
+				<td>
+					@Html.ActionLink("Dettagli Visite", "CADetails", "Clinic",new { id = a.Id }, new { @class = "btn btn-warning" })
+					@Html.ActionLink("Nuova Visita", "NewClinicVisit", "Clinic",new { id = a.Id }, new { @class = "btn btn-warning" })
+					</td>
 			</tr>
 
 

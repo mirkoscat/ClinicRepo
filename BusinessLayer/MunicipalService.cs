@@ -15,7 +15,7 @@ namespace BusinessLayer
             this.db = db;
         }
         public bool CreateMunicipalAnimal(MunicipalAnimal ma)
-        {
+        {//modificare
             db.Animals.Add(ma);
            
             db.SaveChanges();

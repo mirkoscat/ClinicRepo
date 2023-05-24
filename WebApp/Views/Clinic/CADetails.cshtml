@@ -1,9 +1,16 @@
-﻿@using DataLayer
-@model IEnumerable<ClinicVisit>
+﻿
+@model WebApp.Models.CADetailsViewModel
 
-	
-	@foreach(var c in Model){
-	<p>@c.ExamTypology</p>
-	<p>@c.TreatmentDescription</p>
-	<p>@c.VisitDate</p>
+<p>Lista visite di: <strong>@Model.ClinicAnimal.Name</strong></p>
+
+@if (Model.ClinicVisitList.Any())
+{
+	@foreach (var v in Model.ClinicVisitList.OrderByDescending(x=>x.VisitDate))
+	{
+	<p>@v.TreatmentDescription , @v.VisitDate</p>
 	}
+}
+else
+{
+<div class="text-danger">Nessuna Visita</div>	
+}
