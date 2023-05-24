@@ -57,12 +57,12 @@ namespace BusinessLayer
 			db.SaveChanges();
 			return true;
         }
-        public void Upload(int id, IFormFile image)
-        {
-			var img = image;
-			var animal=db.MunicipalAnimals.Single(x => x.Id == id);
-			animal.Picture = img;
-            db.SaveChanges();
-        }
+   //     public void Upload(int id, IFormFile image)
+   //     {
+			//var img = image;
+			//var animal=db.MunicipalAnimals.Single(x => x.Id == id);
+			//animal.Picture = img;
+   //         db.SaveChanges();
+   //     }
     }
 }

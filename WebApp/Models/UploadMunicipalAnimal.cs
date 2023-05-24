@@ -6,9 +6,9 @@ namespace WebApp.Models
     {
         public int Id { get; set; }
 
-        public string Name { get; set; }
+        public string? Name { get; set; }
        
-        public string Typology { get; set; } = String.Empty;
+        public string? Typology { get; set; } = String.Empty;
       
         public string CoatColor { get; set; } = String.Empty;
        
