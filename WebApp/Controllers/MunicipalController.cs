@@ -17,16 +17,55 @@ namespace WebApp.Controllers
         }
 		// GET: MunicipalController
 		public ActionResult Index()
-		{
+		{//creare visita municipale
 			var list = ms.GetMunicipalAnimals();
 			return View(list);
 		}
-		public ActionResult NewMunicipalVisit()
+		public ActionResult NewMunicipalVisit(int id)
 		{
-			//var list = ms.GetMunicipalAnimals().Where(x=>x.IsInHospital);
-			return View();
+			var animal = ms.GetMunicipalAnimalById(id);
+
+            var model = new NMVisitViewModel
+            {
+				MunicipalAnimal = animal,
+				MunicipalVisit = new MunicipalVisit() { 
+                VisitDate = DateTime.Today,
+                PaymentDate = DateTime.Today
+				}
+            };
+
+            return View(model);
+            //var list = ms.GetMunicipalAnimals().Where(x=>x.IsInHospital);
+           
 		}
-		public IActionResult GetImage(int id)
+
+        [HttpPost]
+        public ActionResult NewMunicipalVisit(int id,[Bind("Id")] NMVisitViewModel model)
+        {
+
+            if (ModelState.IsValid)
+            {
+                var idanim = id;
+                var x = new MunicipalVisit()
+                {
+                    VisitDate = model.MunicipalVisit.VisitDate,
+                    ExamTypology = model.MunicipalVisit.ExamTypology,
+                    TreatmentDescription = model.MunicipalVisit.TreatmentDescription,
+                    DescriptionBeforeVisit = model.MunicipalVisit.DescriptionBeforeVisit,
+                    Price=model.MunicipalVisit.Price,
+                    Status=model.MunicipalVisit.Status,
+                    PaymentDate=model.MunicipalVisit.PaymentDate
+                 
+                };
+
+                var result = ms.CreateMunicipalVisit(idanim, x);
+                if (result != false)
+
+                    return RedirectToAction("Index", "Municipal");
+            }
+            return View(model);
+        }
+        public IActionResult GetImage(int id)
         {
             var img = ms.GetImageById(id);
 
@@ -62,9 +101,7 @@ namespace WebApp.Controllers
                     foto = memoryStream.ToArray();
                 }
 
-                // cs.Upload(ma.Id, ma.Picture);
-
-
+            
                 var municipalAnimal = new MunicipalAnimal
                 {
                     Name = ma.Name,

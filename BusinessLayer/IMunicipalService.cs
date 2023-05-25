@@ -15,6 +15,7 @@ namespace BusinessLayer
 		bool DeleteMunicipalAnimal();
         Image GetImageById(int id);
 		MunicipalVisit GetMunicipalVisitById(int id);
+		bool CreateMunicipalVisit(int id, MunicipalVisit cv);
 
-    }
+	}
 }
