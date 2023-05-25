@@ -8,12 +8,14 @@
 <a asp-controller="Municipal" asp-action="CreateMunAnimal" class="btn btn-primary">Create Municipal Animal</a>
 
 @foreach(var a in Model){
-	
-	<div>
-		<p>@a.Name</p>
-		<img src="@Url.Action("GetImage", "Municipal", new { id=a.Id })"/>
+
+	<div class="card" style="width: 18rem;">
+		<img class="card-img-top" src="@Url.Action("GetImage", "Municipal", new { id=a.Id })" alt="Card image cap">
+		<div class="card-body">
+			<h5 class="card-title">@a.Name</h5>
+			<p class="card-text">In Ospital? @a.IsInHospital</p>
+			<p>@Html.ActionLink("Nuova Visita", "NewMunicipalVisit", "Municipal",new { id = a.Id }, new { @class = "btn btn-warning" })</p>
+		</div>
 	</div>
-	<p>@Html.ActionLink("Nuova Visita", "NewMunicipalVisit", "Municipal",new { id = a.Id }, new { @class = "btn btn-warning" })</p>
-	
 
 }
