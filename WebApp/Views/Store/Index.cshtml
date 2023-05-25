@@ -1,0 +1,28 @@
+﻿@using DataLayer
+@model IEnumerable<Product>
+<a asp-controller="Store" asp-action="Create" class="btn btn-primary">Create Product</a>
+
+@if (Model.Any())
+{<div class="containeranimals py-3 px-3">
+	@foreach (var p in Model)
+	{
+		<div class="card" style="width: 18rem;margin-right:50px;margin-bottom:20px;">
+			
+			<div class="card-body">
+				<h5 class="card-title">@p.MedicineName</h5>
+				<p class="card-text">Company: @p.BusinessName</p>
+				<p class="card-text">Tipo: @p.Type</p>
+				<p class="card-text">Uso: @p.Usage</p>
+				<form asp-controller="Store" asp-action="AddToCart" asp-route-id="@p.Id">
+					<input min="1" max="10" type="number" name="qty"/>
+					<button type="submit" class="btn btn-info">Add</button>
+				</form>
+				
+			</div>
+		</div>
+	}</div>
+}
+else
+{
+	<div class="bg-warning text-danger">No Products</div>
+}

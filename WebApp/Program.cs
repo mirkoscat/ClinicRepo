@@ -23,6 +23,7 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<IClinicService,ClinicService>();
 builder.Services.AddScoped<IMunicipalService,MunicipalService>();
+builder.Services.AddScoped<IStoreService,StoreService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

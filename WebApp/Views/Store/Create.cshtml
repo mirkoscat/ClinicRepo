@@ -1,0 +1,99 @@
+﻿@using DataLayer;
+@model DataLayer.Product
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Product</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @*<div class="form-group">
+                <label asp-for="Id" class="control-label"></label>
+                <input asp-for="Id" class="form-control" />
+                <span asp-validation-for="Id" class="text-danger"></span>
+            </div>*@
+            <div class="form-group">
+                <label asp-for="MedicineName" class="control-label"></label>
+                <input asp-for="MedicineName" class="form-control" />
+                <span asp-validation-for="MedicineName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BusinessName" class="control-label"></label>
+                <input asp-for="BusinessName" class="form-control" />
+                <span asp-validation-for="BusinessName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BusinessStreet" class="control-label"></label>
+                <input asp-for="BusinessStreet" class="form-control" />
+                <span asp-validation-for="BusinessStreet" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BusinessTelNum" class="control-label"></label>
+                <input asp-for="BusinessTelNum" class="form-control" />
+                <span asp-validation-for="BusinessTelNum" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="QtyInStock" class="control-label"></label>
+                <input asp-for="QtyInStock" class="form-control" />
+                <span asp-validation-for="QtyInStock" class="text-danger"></span>
+            </div>
+            @*<div class="form-group">
+                <label asp-for="Usage" class="control-label"></label>
+                <input asp-for="Usage" class="form-control" />
+                <span asp-validation-for="Usage" class="text-danger"></span>
+            </div>*@
+            <div class="form-group">
+                <label asp-for="Usage" class="control-label"></label>
+                <select asp-for="Usage" class="form-control">
+                    @foreach (var statusValue in Enum.GetValues(typeof(Usage)))
+                    {
+                        <option value="@statusValue" asp-for="Usage">@statusValue</option>
+                    }
+                </select>
+                <span asp-validation-for="Usage" class="text-danger"></span>
+            </div>
+          @*  <div class="form-group">
+                <label asp-for="Type" class="control-label"></label>
+                <input asp-for="Type" class="form-control" />
+                <span asp-validation-for="Type" class="text-danger"></span>
+            </div>*@
+            <div class="form-group">
+                <label asp-for="Type" class="control-label"></label>
+                <select asp-for="Type" class="form-control">
+                    @foreach (var statusValue2 in Enum.GetValues(typeof(ProductType)))
+                    {
+                        <option value="@statusValue2" asp-for="Type">@statusValue2</option>
+                    }
+                </select>
+                <span asp-validation-for="Type" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NumCassetto" class="control-label"></label>
+                <input min="1" max="10" asp-for="NumCassetto" class="form-control" />
+                <span asp-validation-for="NumCassetto" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NumArmadietto" class="control-label"></label>
+                <input min="1" max="10" asp-for="NumArmadietto" class="form-control" />
+                <span asp-validation-for="NumArmadietto" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
