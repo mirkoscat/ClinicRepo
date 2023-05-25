@@ -41,12 +41,12 @@ namespace WebApp.Controllers
 		}
 
         [HttpPost]
-        public ActionResult NewMunicipalVisit(int id,[Bind("Id")] NMVisitViewModel model)
+        public ActionResult NewMunicipalVisit(int id, NMVisitViewModel model)
         {
 
-            if (ModelState.IsValid)
-            {
-                var idanim = id;
+
+            var animal = ms.GetMunicipalAnimalById(id);
+
                 var x = new MunicipalVisit()
                 {
                     VisitDate = model.MunicipalVisit.VisitDate,
@@ -56,17 +56,30 @@ namespace WebApp.Controllers
                     Price=model.MunicipalVisit.Price,
                     Status=model.MunicipalVisit.Status,
                     PaymentDate=model.MunicipalVisit.PaymentDate
+                    
+                    
                  
                 };
-
-                var result = ms.CreateMunicipalVisit(idanim, x);
-                if (result != false)
+                //x.MunicipalAnimals.Add(animal);
+               ms.CreateMunicipalVisit(animal.Id, x);
+                
 
                     return RedirectToAction("Index", "Municipal");
-            }
-            return View(model);
+          
         }
-        public IActionResult GetImage(int id)
+		public ActionResult MADetails(int id)
+		{
+			var animal = ms.GetMunicipalAnimalById(id);
+			var visite = animal.MunicipalVisits.OrderByDescending(x=>x.VisitDate).ToList();
+			var model = new MADetailsViewModel
+			{
+				MunicipalAnimal = animal,
+				MunicipalVisits = visite
+			};
+
+			return View(model);
+		}
+		public IActionResult GetImage(int id)
         {
             var img = ms.GetImageById(id);
 
@@ -112,7 +125,10 @@ namespace WebApp.Controllers
                     RecoveryEnd = ma.RecoveryEnd,
                     IsInHospital = ma.IsInHospital,
                     Picture = foto,
-                    FileExtension=ma.Picture.ContentType
+                    FileExtension=ma.Picture.ContentType,
+                    MicrochipNumber = ma.MicrochipNumber,
+                    HasMicrochip = ma.HasMicrochip
+                    
 
                 };
 

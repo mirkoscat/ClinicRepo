@@ -49,29 +49,41 @@
             </div>*@
           
             <div class="form-group">
-                <label asp-for="Typology" class="control-label"></label>
-                <input asp-for="Typology" class="form-control" />
-                <span asp-validation-for="Typology" class="text-danger"></span>
+                <label asp-for="@Model.Typology" class="control-label"></label>
+                <input asp-for="@Model.Typology" class="form-control" />
+                <span asp-validation-for="@Model.Typology" class="text-danger"></span>
             </div>
            
             
             <div class="form-group">
-                <label asp-for="CoatColor" class="control-label"></label>
-                <input asp-for="CoatColor" class="form-control" />
-                <span asp-validation-for="CoatColor" class="text-danger"></span>
+                <label asp-for="@Model.CoatColor" class="control-label"></label>
+                <input asp-for="@Model.CoatColor" class="form-control" />
+                <span asp-validation-for="@Model.CoatColor" class="text-danger"></span>
             </div>
-           @* <div class="form-group">
+            <div class="form-group">
                 <label class="control-label">Has Microchip ?</label>
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" id="HasMicrochip" name="HasMicrochip" value="true">
                 </div>
-                <span asp-validation-for="HasMicrochip" class="text-danger"></span>
+                <span asp-validation-for="@Model.HasMicrochip" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="MicrochipNumber" class="control-label"></label>
-                <input asp-for="MicrochipNumber" class="form-control" />
-                <span asp-validation-for="MicrochipNumber" class="text-danger"></span>
-            </div>*@
+            <div id="showthings" style="display: none;">
+                <div class="form-group">
+                    <label asp-for="@Model.MicrochipNumber" class="control-label"></label>
+                    <input asp-for="@Model.MicrochipNumber" class="form-control" />
+                    <span asp-validation-for="@Model.MicrochipNumber" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.OwnerName" class="control-label"></label>
+                    <input asp-for="@Model.OwnerName" class="form-control" />
+                    <span asp-validation-for="@Model.OwnerName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.OwnerLastName" class="control-label"></label>
+                    <input asp-for="@Model.OwnerLastName" class="form-control" />
+                    <span asp-validation-for="@Model.OwnerLastName" class="text-danger"></span>
+                </div>
+            </div>
        
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
@@ -85,5 +97,17 @@
 </div>
 
 @section Scripts {
+    <script>
+        var hasMicrochipCheckbox = document.getElementById("HasMicrochip");
+        var showDiv = document.getElementById("showthings");
+
+        hasMicrochipCheckbox.addEventListener("click", function () {
+            if (hasMicrochipCheckbox.checked) {
+                showDiv.style.display = "block";
+            } else {
+                showDiv.style.display = "none";
+            }
+        });
+    </script>
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

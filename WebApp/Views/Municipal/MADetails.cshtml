@@ -1,0 +1,23 @@
+﻿
+@model WebApp.Models.MADetailsViewModel
+
+<p>Lista visite di: <strong>@Model.MunicipalAnimal.Name</strong></p>
+
+@if (Model.MunicipalVisits.Any())
+{
+	@foreach (var v in Model.MunicipalVisits.OrderByDescending(x => x.VisitDate))
+	{
+		<div>
+			<dl>
+			<dd>Status @v.Status</dd>
+			<dd>Visita @v.VisitDate</dd>
+			
+			</dl>
+		</div>
+
+	}
+}
+else
+{
+<div class="text-danger">Nessuna Visita</div>	
+}
