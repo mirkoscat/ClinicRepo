@@ -1,24 +1,31 @@
 ﻿@using DataLayer
-@model Animal
+@model AllAnimals
 @{
-    ViewData["Title"] = "Find Animal by Microchip";
+	ViewData["Title"] = "Find Animal by Microchip";
 }
 
 <h1>@ViewData["Title"]</h1>
 
-<form asp-controller="Home" asp-action="FindAnimal" >
-    <label>Chip Number:</label>
-    <input required type="text" name="id" />
-    <button value="submit">Find</button>
+<form asp-controller="Home" asp-action="FindAnimal">
+	<label>Chip Number:</label>
+	<input required type="text" name="id" />
+	<button value="submit">Find</button>
 </form>
 @if (Model != null)
 {
-    
-    <p>@Model.Name</p>
+	@if (Model.ClinicAnimal != null)
+	{
+		<p>@Model.ClinicAnimal.Name</p>
+	}
+	else if (Model.MunicipalAnimal != null)
+	{
+		<p>@Model.MunicipalAnimal.Name</p>
+
+		<img class="card-img-top" src="@Url.Action("GetImage", "Municipal", new { id=Model.MunicipalAnimal.Id })" alt="Card image cap">
+	}
 }
 else
 {
-    
-<p>No data </p>
+	<p>No data </p>
 }
 <!--cercare l'animale per microchip.vedere se nella lista di ricoveri(municipalvisit) c'è l'animale tramite isinhospital, visualizzare foto-->

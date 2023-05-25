@@ -20,5 +20,10 @@ namespace WebApp.Models
         public IFormFile Picture { get; set; }
        
         public bool IsInHospital { get; set; } = false;
+        public bool? HasMicrochip { get; set; } = false;
+        public string? MicrochipNumber { get; set; }
+        public string? OwnerName { get; set; } = String.Empty;
+
+        public string? OwnerLastName { get; set; } = String.Empty;
     }
 }

@@ -14,7 +14,9 @@
 		<div class="card-body">
 			<h5 class="card-title">@a.Name</h5>
 			<p class="card-text">In Ospital? @a.IsInHospital</p>
-			<p>@Html.ActionLink("Nuova Visita", "NewMunicipalVisit", "Municipal",new { id = a.Id }, new { @class = "btn btn-warning" })</p>
+			<p>@Html.ActionLink("Nuova Visita", "NewMunicipalVisit", "Municipal",new { id = a.Id }, new { @class = "btn btn-warning" })
+				@Html.ActionLink("Dettagli Ricovero", "MADetails", "Municipal",new { id = a.Id }, new { @class = "btn btn-warning" })
+			</p>
 		</div>
 	</div>
 

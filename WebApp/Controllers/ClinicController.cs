@@ -87,7 +87,7 @@ namespace WebApp.Controllers
 
         }
 		[HttpPost]
-		public ActionResult NewClinicVisit(int id, [Bind("Id")] NCVisitViewModel model)
+		public ActionResult NewClinicVisit(int id, NCVisitViewModel model)
 		{
 			
 			if (ModelState.IsValid) {

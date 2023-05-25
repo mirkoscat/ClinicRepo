@@ -47,8 +47,18 @@ namespace BusinessLayer
 
 			return Enumerable.Empty<ClinicVisit>();
 		}
-        
-        public Animal GetAnimalByChip(string chip) => db.Animals.FirstOrDefault(x=>x.MicrochipNumber==chip);
+
+		public AllAnimals GetAnimalByChip(string chip) {
+			var animals= new AllAnimals();	
+			
+			animals.ClinicAnimal = db.ClinicAnimals.FirstOrDefault(x => x.MicrochipNumber == chip);
+            animals.MunicipalAnimal = db.MunicipalAnimals.FirstOrDefault(x => x.MicrochipNumber == chip);
+
+			return animals;
+
+
+        }
+		
 
         public bool CreateClinicVisit(int id,ClinicVisit cv)
         {
