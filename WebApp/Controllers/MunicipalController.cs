@@ -17,8 +17,9 @@ namespace WebApp.Controllers
         }
 		// GET: MunicipalController
 		public ActionResult Index()
-		{//creare visita municipale
-			var list = ms.GetMunicipalAnimals();
+		{
+			var list = ms.GetMunicipalAnimals().Where(x=>x.IsInHospital==true);
+            
 			return View(list);
 		}
 		public ActionResult NewMunicipalVisit(int id)
