@@ -31,17 +31,5 @@ namespace WebApp.Controllers
            
         }
 
-  //      [HttpPost]
-		//public IActionResult FindAnimal(string chip)
-		//{
-		//	var animal=cs.GetAnimalByChip(chip);
-		//	return RedirectToAction("FindAnimal",animal.Id);
-		//}
-
-		//[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-		//public IActionResult Error()
-		//{
-		//	return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-		//}
 	}
 }
