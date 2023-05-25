@@ -1,0 +1,80 @@
+﻿@using DataLayer;
+@model WebApp.Models.NMVisitViewModel
+
+@{
+    ViewData["Title"] = "NewMunicipalVisit";
+}
+
+<h1>NewMunicipalVisit of @Model.MunicipalAnimal.Name</h1>
+
+<h4>NMVisitViewModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="NewMunicipalVisit" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="@Model.MunicipalVisit.VisitDate" class="control-label"></label>
+                <input asp-for="@Model.MunicipalVisit.VisitDate" class="form-control" />
+                <span asp-validation-for="@Model.MunicipalVisit.VisitDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.MunicipalVisit.PaymentDate" class="control-label"></label>
+                <input asp-for="@Model.MunicipalVisit.PaymentDate" class="form-control" />
+                <span asp-validation-for="@Model.MunicipalVisit.PaymentDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.MunicipalVisit.ExamTypology" class="control-label"></label>
+                <input asp-for="@Model.MunicipalVisit.ExamTypology" class="form-control" />
+                <span asp-validation-for="@Model.MunicipalVisit.ExamTypology" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.MunicipalVisit.TreatmentDescription" class="control-label"></label>
+                <input asp-for="@Model.MunicipalVisit.TreatmentDescription" class="form-control" />
+                <span asp-validation-for="@Model.MunicipalVisit.TreatmentDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.MunicipalVisit.DescriptionBeforeVisit" class="control-label"></label>
+                <input asp-for="@Model.MunicipalVisit.DescriptionBeforeVisit" class="form-control" />
+                <span asp-validation-for="@Model.MunicipalVisit.DescriptionBeforeVisit" class="text-danger"></span>
+            </div>
+            @*<div class="form-group">
+                <label asp-for="@Model.MunicipalVisit.Status" class="control-label"></label>
+                <input asp-for="@Model.MunicipalVisit.Status" class="form-control" />
+                
+                <span asp-validation-for="@Model.MunicipalVisit.Status" class="text-danger"></span>
+            </div>*@
+            <div class="form-group">
+                <label asp-for="@Model.MunicipalVisit.Status" class="control-label"></label>
+                <select asp-for="@Model.MunicipalVisit.Status" class="form-control">
+                    @foreach (var statusValue in Enum.GetValues(typeof(RecoveryStatus)))
+                    {
+                        <option value="@statusValue" asp-for="@Model.MunicipalVisit.Status" >@statusValue</option>
+                    }
+                </select>
+                <span asp-validation-for="@Model.MunicipalVisit.Status" class="text-danger"></span>
+            </div>
+
+           
+            <div class="form-group">
+                <label asp-for="@Model.MunicipalVisit.Price" class="control-label"></label>
+                <input min="1"  asp-for="@Model.MunicipalVisit.Price" class="form-control" />
+
+                <span asp-validation-for="@Model.MunicipalVisit.Price" class="text-danger"></span>
+            </div>
+           
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

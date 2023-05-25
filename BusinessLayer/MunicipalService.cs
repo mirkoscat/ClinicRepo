@@ -23,7 +23,15 @@ namespace BusinessLayer
             return true;
         }
 
-        public bool DeleteMunicipalAnimal()
+		public bool CreateMunicipalVisit(int id, MunicipalVisit cv)
+		{
+			var animal = db.MunicipalAnimals.Single(x => x.Id == id);
+			animal.MunicipalVisits.Add(cv);
+			db.SaveChanges();
+			return true;
+		}
+
+		public bool DeleteMunicipalAnimal()
         {
             throw new NotImplementedException();
         }
