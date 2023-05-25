@@ -60,7 +60,7 @@ namespace WebApp.Controllers
                     
                  
                 };
-                //x.MunicipalAnimals.Add(animal);
+              
                ms.CreateMunicipalVisit(animal.Id, x);
                 
 

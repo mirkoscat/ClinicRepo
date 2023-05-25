@@ -24,7 +24,7 @@
 		<p>In Ospital? @Model.MunicipalAnimal.IsInHospital</p>
 		<p>Recovery start: @Model.MunicipalAnimal.RecoveryStart</p>
 
-		<img class="card-img-top" src="@Url.Action("GetImage", "Municipal", new { id=Model.MunicipalAnimal.Id })" alt="Card image cap">
+		<img style="width:300px;height:300px;"class="card-img-top" src="@Url.Action("GetImage", "Municipal", new { id=Model.MunicipalAnimal.Id })" alt="Card image cap">
 	}
 }
 else
