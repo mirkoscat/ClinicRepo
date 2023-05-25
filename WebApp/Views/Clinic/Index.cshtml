@@ -1,40 +1,36 @@
 ﻿@using DataLayer;
 
 @model IEnumerable<ClinicAnimal>
+
 <a asp-controller="Clinic" asp-action="Create" class="btn btn-primary">Create Clinic Animal</a>
 <a asp-controller="Municipal" asp-action="CreateMunAnimal" class="btn btn-primary">Create Municipal Animal</a>
 
 <h2>List of Clinic Animals</h2>
-<table class="table">
-	<thead>
-	<th>Name</th>
-	<th>Typology</th>
-	<th>Microchip?</th>
-	<th>Microchip Number</th>
-	<th>Owner Name</th>
-	<th></th>
-	
-
-	</thead>
-	<tbody>
+@if (Model.Any())
+{
+	<div class="containeranimals py-3 px-3">
 		@foreach (var a in Model)
 		{
-			<tr>
-				<td>@a.Name</td>
-				<td>@a.Typology</td>
-				<td>@a.HasMicrochip</td>
-				<td>@a.MicrochipNumber</td>
-				<td>@a.OwnerName</td>
-
-
-
-				<td>
-					@Html.ActionLink("Dettagli Visite", "CADetails", "Clinic",new { id = a.Id }, new { @class = "btn btn-warning" })
-					@Html.ActionLink("Nuova Visita", "NewClinicVisit", "Clinic",new { id = a.Id }, new { @class = "btn btn-warning" })
-					</td>
-			</tr>
+			<div class="card" style="width: 18rem;margin-right:50px;margin-bottom:20px;">
+				@*<img class="card-img-top" src="@Url.Action("GetImage", "Municipal", new { id=a.Id })" alt="@a.Name">
+		*@<div class="card-body">
+					<h5 class="card-title">Name: @a.Name</h5>
+					<p class="card-text">Type: @a.Typology</p>
+					<p class="card-text">Chip: @a.MicrochipNumber</p>
+					<p class="card-text">Owner: @a.OwnerName @a.OwnerLastName</p>
+					<p>
+						@Html.ActionLink("Nuova Visita", "NewClinicVisit", "Clinic",new { id = a.Id }, new { @class = "btn btn-warning" })
+						@Html.ActionLink("Dettagli Visite", "CADetails", "Clinic",new { id = a.Id }, new { @class = "btn btn-warning" })
+					</p>
+				</div>
+			</div>
 
 
 		}
-	</tbody>
-</table>
+	</div>
+}
+else
+{
+
+	<div class="bg-warning text-danger">No Data</div>
+}

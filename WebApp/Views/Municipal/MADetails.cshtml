@@ -1,23 +1,28 @@
-﻿
+﻿@using DataLayer;
 @model WebApp.Models.MADetailsViewModel
+@{
+	var count = Model.MunicipalVisits.Where(m => m.Status ==(RecoveryStatus)1).Count();
+	var somma = Model.MunicipalVisits.Where(m => m.PaymentDate.Month==5).Sum(m => m.Price);
+	var tot =0;
+}
+<p>@Model.MunicipalAnimal.Name ha subìto @count ricoveri e in questo mese si sono spesi @somma euro per lui</p>
+
 
 <p>Lista visite di: <strong>@Model.MunicipalAnimal.Name</strong></p>
 
 @if (Model.MunicipalVisits.Any())
 {
-	@foreach (var v in Model.MunicipalVisits.OrderByDescending(x => x.VisitDate))
-	{
-		<div>
-			<dl>
+	<dl>
+		@foreach (var v in Model.MunicipalVisits.OrderByDescending(x => x.VisitDate))
+		{ var subtot = 0;
+			 subtot += (int)(@v.Price);
 			<dd>Status @v.Status</dd>
 			<dd>Visita @v.VisitDate</dd>
-			
-			</dl>
-		</div>
-
-	}
+			<dd>@v.Price</dd>
+		}
+	</dl>
 }
 else
 {
-<div class="text-danger">Nessuna Visita</div>	
+	<div class="bg-warning text-danger">Nessuna Visita</div>
 }

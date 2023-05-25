@@ -14,6 +14,11 @@ namespace DataLayer
         public DbSet<MunicipalAnimal> MunicipalAnimals { get; set; }
         public DbSet<ClinicVisit> ClinicVisits { get; set; }
         public DbSet<MunicipalVisit> MunicipalVisits { get; set; }
+        public DbSet<Owner> Owners { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<Cart> Carts { get; set; }
+        public DbSet<ProductCart> ProductCarts { get; set; }
+
 
         public DataDbContext(DbContextOptions<DataDbContext> opt):base(opt) 
         {

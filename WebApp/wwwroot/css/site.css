@@ -18,5 +18,28 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    background-color: #ECF8F9;
+}
+.indeximg {
+    width:800px;
+    height:400px;
+}
+.containeranimals {
+    display:flex;
+    
+}
+@media only screen and (max-width:500px) {
+    .indeximg {
+        width: 80%;
+        height: 200px;
+    }
+    .card {width:80vw;
+           margin-left:auto;
+           margin-right:auto;
+    }
+    .containeranimals {
+        display: flex;
+        flex-direction:column;
+    }
 }

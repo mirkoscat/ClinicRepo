@@ -14,12 +14,15 @@
 @if (Model != null)
 {
 	@if (Model.ClinicAnimal != null)
-	{
-		<p>@Model.ClinicAnimal.Name</p>
+	{	<p>Pet registered </p>
+		<p>Pet Name:@Model.ClinicAnimal.Name</p>
+		<p>Ragistration Date: @Model.ClinicAnimal.RegistrationDate</p>
 	}
 	else if (Model.MunicipalAnimal != null)
 	{
-		<p>@Model.MunicipalAnimal.Name</p>
+		<p>Name: @Model.MunicipalAnimal.Name</p>
+		<p>In Ospital? @Model.MunicipalAnimal.IsInHospital</p>
+		<p>Recovery start: @Model.MunicipalAnimal.RecoveryStart</p>
 
 		<img class="card-img-top" src="@Url.Action("GetImage", "Municipal", new { id=Model.MunicipalAnimal.Id })" alt="Card image cap">
 	}
@@ -28,4 +31,3 @@ else
 {
 	<p>No data </p>
 }
-<!--cercare l'animale per microchip.vedere se nella lista di ricoveri(municipalvisit) c'è l'animale tramite isinhospital, visualizzare foto-->
