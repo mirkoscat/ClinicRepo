@@ -20,8 +20,7 @@ namespace BusinessLayer
         }
         public bool AddToCart(Product p, Cart c, int qty)
         {
-            var prodcartcheck = db.ProductCarts.Any();
-         
+            var prodcartcheck = db.ProductCarts.Any(x => x.Product.Id == p.Id);
 
             if (!prodcartcheck)
             {
@@ -32,20 +31,18 @@ namespace BusinessLayer
                     Product = p
                 };
                 db.ProductCarts.Add(prodotto);
-                db.SaveChanges();
-                return true;
             }
             else
             {
                 var productcart = db.ProductCarts.FirstOrDefault(x => x.Product.Id == p.Id);
-               
-              
-                    productcart.Quantity += qty;
-                    db.SaveChanges();
-                    return true;
-                }
-            
+                productcart.Quantity += qty;
+            }
+
+            db.SaveChanges();
+            return true;
         }
+
+        
 
         public bool CreateProduct(Product p)
         {
