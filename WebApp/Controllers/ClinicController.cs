@@ -86,9 +86,7 @@ namespace WebApp.Controllers
 		[HttpPost]
 		public ActionResult NewClinicVisit(int id, NCVisitViewModel model)
 		{
-			
-			if (ModelState.IsValid) {
-				var idanim=id;
+		
 				var x = new ClinicVisit() { 
 				VisitDate= model.ClinicVisit.VisitDate,
 				ExamTypology= model.ClinicVisit.ExamTypology,
@@ -96,11 +94,11 @@ namespace WebApp.Controllers
 				DescriptionBeforeVisit=model.ClinicVisit.DescriptionBeforeVisit				
 				};
 				
-				var result = cs.CreateClinicVisit(idanim ,x);
+				var result = cs.CreateClinicVisit(id ,x);
 				if(result != false)
 
 				return RedirectToAction("Index","Clinic");
-			}
+			
 			return View(model);
 		}
 	

@@ -1,0 +1,50 @@
+﻿@using DataLayer
+@model IEnumerable<ProductCart>
+@{
+	int count = 0;
+}
+<p>Lista prodotti nel carrello</p>
+
+@if (Model.Any())
+{
+
+	<table class="table">
+		<thead>
+		<th>Product</th>
+		<th>Quantity</th>
+		<th>Price</th>
+		</thead>
+		<tbody>
+			@foreach (var p in Model)
+			{
+
+				int subtot = (int)@p.Product.Price * @p.Quantity;
+				count += subtot;
+				<tr>
+					<td>@p.Product.MedicineName</td>
+					<td>@p.Quantity</td>
+					<td>@p.Product.Price €</td>
+				</tr>
+
+			}
+		</tbody>
+	</table>
+	<p>Totale:@count €</p>
+}
+else
+{
+	<div class="bg-warning text-danger">No products</div>
+}
+<div class="container">
+	<form method="post" enctype="multipart/form-data">
+		<label>Street</label>
+		<br />
+		<input type="text" required />
+		<br />
+		<label>Prescription</label>
+		<br />
+		<input type="file" accept=".jpeg,.jpg,.png,.pdf" />
+		<br />
+		<button class="btn btn-info">Checkout</button>
+	</form>
+</div>
