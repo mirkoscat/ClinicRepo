@@ -25,11 +25,12 @@
                         <li class="nav-item">
                             <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="FindAnimal">Find Pet</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Cart" asp-action="Index">Cart</a>
-                        </li>
+                      
                         @if (User.IsInRole("VetClinic") || User.IsInRole("SuperAdmin"))
                         {
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Cart" asp-action="Index">Cart</a>
+                            </li>
                             <li class="nav-item">
                                 <a class="nav-link text-white" asp-area="" asp-controller="Clinic" asp-action="Index">Vet.Page</a>
                             </li>

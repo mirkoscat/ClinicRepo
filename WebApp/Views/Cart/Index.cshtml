@@ -1,11 +1,11 @@
 ﻿@using DataLayer
-@model IEnumerable<ProductCart>
+@model CartViewModel
 @{
 	int count = 0;
 }
 <p>Lista prodotti nel carrello</p>
 
-@if (Model.Any())
+@if (Model.ProductCartList.Any())
 {
 
 	<table class="table">
@@ -15,7 +15,7 @@
 		<th>Price</th>
 		</thead>
 		<tbody>
-			@foreach (var p in Model)
+			@foreach (var p in Model.ProductCartList)
 			{
 
 				int subtot = (int)@p.Product.Price * @p.Quantity;

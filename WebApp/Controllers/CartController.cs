@@ -1,13 +1,17 @@
-﻿using DataLayer;
-using Microsoft.AspNetCore.Http;
+﻿
+using DataLayer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using WebApp.Models;
 
 namespace WebApp.Controllers
 {
-    public class CartController : Controller
+	[Authorize(Roles = "SuperAdmin")]
+	public class CartController : Controller
     {
-        private readonly DataDbContext db;
+		
+		private readonly DataDbContext db;
         public CartController(DataDbContext db)
         {
             this.db = db;
@@ -15,8 +19,14 @@ namespace WebApp.Controllers
         // GET: CartController
         public ActionResult Index()
         {
+            var cart = db.Carts.FirstOrDefault(x=>x.Username==User.Identity.Name);
             var list=db.ProductCarts.Include(x=>x.Product).ToList();
-            return View(list);
+            var model = new CartViewModel
+            {
+                ProductCartList = list,
+                Cart = cart
+            };
+            return View(model);
         }
 
         // GET: CartController/Details/5
