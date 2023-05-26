@@ -1,4 +1,5 @@
 ﻿
+
 using DataLayer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -20,7 +21,7 @@ namespace WebApp.Controllers
         public ActionResult Index()
         {
             var cart = db.Carts.FirstOrDefault(x=>x.Username==User.Identity.Name);
-            var list=db.ProductCarts.Include(x=>x.Product).ToList();
+            var list=db.ProductCarts.Include(nameof(Product)).ToList();
             var model = new CartViewModel
             {
                 ProductCartList = list,
@@ -28,7 +29,17 @@ namespace WebApp.Controllers
             };
             return View(model);
         }
+        [HttpPost]
+        public ActionResult UpdateQuantity(IFormCollection form)
+        {
 
+            var id = long.Parse(form["id"]);
+            var qty = int.Parse(form["qty"]);
+            var productInCart = db.ProductCarts.FirstOrDefault(x => x.Product.Id == id);
+            productInCart.Quantity = qty;
+            db.SaveChanges();
+            return RedirectToAction("Index","Cart");
+        }
         // GET: CartController/Details/5
         public ActionResult Details(int id)
         {

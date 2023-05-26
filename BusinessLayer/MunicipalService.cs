@@ -47,7 +47,8 @@ namespace BusinessLayer
 
         public IEnumerable<MunicipalAnimal> GetMunicipalAnimalsInRecovery()
         {//work in progress
-            var animals = db.MunicipalAnimals;
+            var animals = db.MunicipalAnimals.Where(x => x.IsInHospital == true);
+          //  var visits = db.MunicipalVisits.Where(x=>x.Status==(RecoveryStatus)1);
             return animals;
         }
 
