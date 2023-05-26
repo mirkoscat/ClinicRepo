@@ -1,13 +1,16 @@
 ﻿
 
+using System.Data;
 using BusinessLayer;
 using DataLayer;
-
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebApp.Models;
 
 namespace WebApp.Controllers
 {
+	[Authorize(Roles = "SuperAdmin")]
+	//[Authorize(Roles = "VetClinic")]
 	public class ClinicController : Controller
 	{
 		private readonly IClinicService cs;
@@ -25,12 +28,6 @@ namespace WebApp.Controllers
 		{
 			var list = cs.GetClinicAnimals();
 			return View(list);
-		}
-
-		// GET: ClinicController/Details/5
-		public ActionResult Details(int id)
-		{
-			return View();
 		}
 
 		// GET: ClinicController/Create
@@ -106,45 +103,17 @@ namespace WebApp.Controllers
 			}
 			return View(model);
 		}
-		// GET: ClinicController/Edit/5
-		public ActionResult Edit(int id)
-		{
-			return View();
-		}
-
-		// POST: ClinicController/Edit/5
-		[HttpPost]
-		[ValidateAntiForgeryToken]
-		public ActionResult Edit(int id, IFormCollection collection)
-		{
-			try
-			{
-				return RedirectToAction(nameof(Index));
-			}
-			catch
-			{
-				return View();
-			}
-		}
+	
 
 		// GET: ClinicController/Delete/5
 		public ActionResult Delete(int id)
 		{
+			var result = cs.DeleteClinicAnimal(id);
+			if (result != false)
+				return RedirectToAction(nameof(Index));
 			return View();
 		}
 
-		// POST: ClinicController/Delete/5
-		[HttpPost]
-		[ValidateAntiForgeryToken]
-		public ActionResult Delete(int id, IFormCollection collection)
-		{
-			var result=cs.DeleteClinicAnimal(id);
-				if(result != false) 
-					return RedirectToAction(nameof(Index));
-				
-			
-				return View();
-			
-		}
+		
 	}
 }

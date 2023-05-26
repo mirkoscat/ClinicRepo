@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+
 using DataLayer;
+using Microsoft.Identity.Client;
 
 namespace BusinessLayer
 {
@@ -15,9 +18,33 @@ namespace BusinessLayer
         {
             this.db = db;
         }
-        public bool AddToCart()
+        public bool AddToCart(Product p, Cart c, int qty)
         {
-            throw new NotImplementedException();
+            var prodcartcheck = db.ProductCarts.Any();
+         
+
+            if (!prodcartcheck)
+            {
+                var prodotto = new ProductCart
+                {
+                    Quantity = qty,
+                    Cart = c,
+                    Product = p
+                };
+                db.ProductCarts.Add(prodotto);
+                db.SaveChanges();
+                return true;
+            }
+            else
+            {
+                var productcart = db.ProductCarts.FirstOrDefault(x => x.Product.Id == p.Id);
+               
+              
+                    productcart.Quantity += qty;
+                    db.SaveChanges();
+                    return true;
+                }
+            
         }
 
         public bool CreateProduct(Product p)
@@ -32,7 +59,7 @@ namespace BusinessLayer
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Product> GetProducts()=>db.Products.ToList();
+        public IEnumerable<Product> GetProducts() => db.Products.ToList();
 
         public IEnumerable<Product> GetProductsByDate(string date)
         {

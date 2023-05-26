@@ -1,5 +1,7 @@
-﻿using BusinessLayer;
+﻿using System.Data;
+using BusinessLayer;
 using DataLayer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NuGet.Protocol;
@@ -7,7 +9,9 @@ using WebApp.Models;
 
 namespace WebApp.Controllers
 {
-    public class MunicipalController : Controller
+	[Authorize(Roles = "SuperAdmin")]
+	//[Authorize(Roles = "VetClinic")]
+	public class MunicipalController : Controller
     {
         private static int fileCounter = 0;
         private readonly IMunicipalService ms;
@@ -36,16 +40,14 @@ namespace WebApp.Controllers
             };
 
             return View(model);
-            //var list = ms.GetMunicipalAnimals().Where(x=>x.IsInHospital);
+           
            
 		}
 
         [HttpPost]
         public ActionResult NewMunicipalVisit(int id, NMVisitViewModel model)
         {
-
-
-            var animal = ms.GetMunicipalAnimalById(id);
+                var animal = ms.GetMunicipalAnimalById(id);
 
                 var x = new MunicipalVisit()
                 {
@@ -64,7 +66,7 @@ namespace WebApp.Controllers
                ms.CreateMunicipalVisit(animal.Id, x);
                 
 
-                    return RedirectToAction("Index", "Municipal");
+               return RedirectToAction("Index", "Municipal");
           
         }
 		public ActionResult MADetails(int id)
@@ -79,12 +81,10 @@ namespace WebApp.Controllers
 
 			return View(model);
 		}
+        [AllowAnonymous]
 		public IActionResult GetImage(int id)
         {
             var img = ms.GetImageById(id);
-
-			// trasformare l'immagine in file 
-			// per restituirla al browser
 			return File(img.Data,img.Extension);
         }
 
@@ -108,10 +108,8 @@ namespace WebApp.Controllers
                 using (var memoryStream = new MemoryStream())
                 {
                     ma.Picture.CopyTo(memoryStream);
-                    memoryStream.Seek(0, SeekOrigin.Begin); // Riavvolge lo stream all'inizio
-
+                    memoryStream.Seek(0, SeekOrigin.Begin); 
                     var fieldName = $"Picture{fileCounter++}";
-
                     foto = memoryStream.ToArray();
                 }
 
@@ -128,8 +126,7 @@ namespace WebApp.Controllers
                     FileExtension=ma.Picture.ContentType,
                     MicrochipNumber = ma.MicrochipNumber,
                     HasMicrochip = ma.HasMicrochip
-                    
-
+                   
                 };
 
                 var result = ms.CreateMunicipalAnimal(municipalAnimal);
@@ -140,49 +137,5 @@ namespace WebApp.Controllers
             return View(ma);
         }
 
-
-
-
-        // GET: MunicipalController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: MunicipalController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: MunicipalController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: MunicipalController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
     }
 }

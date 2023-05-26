@@ -16,8 +16,8 @@ namespace DataLayer
         [Required]
         public int Quantity { get; set; }
         public string? Prescription { get; set; }=String.Empty;
-        public Product Product { get; set; }
-        public Cart Cart { get; set; }  
+        public Product Product { get; set; }=new Product();
+        public Cart Cart { get; set; }  =new Cart();
 
     }
 }
