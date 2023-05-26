@@ -17,15 +17,23 @@
 		<tbody>
 			@foreach (var p in Model.ProductCartList)
 			{
-
-				int subtot = (int)@p.Product.Price * @p.Quantity;
+				int subtot = 0;
+				subtot = (int)@p.Product.Price * @p.Quantity;
 				count += subtot;
-				<tr>
-					<td>@p.Product.MedicineName</td>
-					<td>@p.Quantity</td>
-					<td>@p.Product.Price €</td>
-				</tr>
-
+				if (p.Quantity > 0)
+				{
+					<tr>
+						<td>@p.Product.MedicineName</td>
+						<td>
+							<form asp-controller="Cart" asp-action="UpdateQuantity" method="POST">
+								<input type="hidden" name="id" asp-for="@p.Product.Id" id="id" />
+								<input type="number" placeholder="@p.Quantity" asp-for="@p.Quantity" id="qty" name="qty" min="0" />
+								<button type="submit" class="btn btn-success">Aggiorna</button>
+							</form>
+						</td>
+						<td>@p.Product.Price €</td>
+					</tr>
+				}
 			}
 		</tbody>
 	</table>

@@ -10,7 +10,7 @@ using WebApp.Models;
 namespace WebApp.Controllers
 {
 	[Authorize(Roles = "SuperAdmin")]
-	//[Authorize(Roles = "VetClinic")]
+	
 	public class ClinicController : Controller
 	{
 		private readonly IClinicService cs;
