@@ -24,6 +24,7 @@ namespace DataLayer
 		public ProductType? Type { get; set; } = 0;
         public string? NumCassetto { get; set; }
         public string? NumArmadietto { get; set; }
+        public int? Price { get; set; }
         public ICollection<ProductCart> ProductsInCart { get; set; } = new List<ProductCart>();
 
     }
