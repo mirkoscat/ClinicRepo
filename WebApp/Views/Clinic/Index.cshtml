@@ -21,6 +21,7 @@
 					<p>
 						@Html.ActionLink("Nuova Visita", "NewClinicVisit", "Clinic",new { id = a.Id }, new { @class = "btn btn-warning" })
 						@Html.ActionLink("Dettagli Visite", "CADetails", "Clinic",new { id = a.Id }, new { @class = "btn btn-warning" })
+						@Html.ActionLink("Delete", "Delete", "Clinic",new { id = a.Id }, new { @class = "btn btn-danger" })
 					</p>
 				</div>
 			</div>

@@ -21,28 +21,26 @@ namespace DataLayer
         public string? BusinessTelNum { get; set; }
         public int QtyInStock { get; set; }
         public Usage? Usage { get; set; } = 0;
-        public ProductType? Type { get; set; } = 0;
+		public ProductType? Type { get; set; } = 0;
         public string? NumCassetto { get; set; }
         public string? NumArmadietto { get; set; }
         public ICollection<ProductCart> ProductsInCart { get; set; } = new List<ProductCart>();
 
-
-
     }
 	public enum Usage : int
 	{
-		otite,
-		raffreddore,
-		dermatite,
-		dolorealleossa,
-		cibosecco
+		EarInfection,
+		Cold,
+		Dermatitis,
+		BonePain,
+		DryFood
 
 	}
 	public enum ProductType : int
 	{
-		Medicinale,
+		Medicin,
         Integratore,
-        Alimento
+        Food
 
 	}
 }

@@ -13,12 +13,8 @@ namespace BusinessLayer
 		IEnumerable<Product> GetProducts();
 		IEnumerable<Product> GetProductsByFiscalCode(string fc);
 		IEnumerable<Product> GetProductsByDate(string date);
-		bool AddToCart();
+		bool AddToCart(Product p, Cart c, int qty);
 		bool DeleteToCart();
-		
-
-		//lista farmaci
-		//getfarmacobyid
-		
+	
 	}
 }

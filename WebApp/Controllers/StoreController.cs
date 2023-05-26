@@ -1,16 +1,23 @@
-﻿using BusinessLayer;
+﻿using System.Data;
+using System.Data.Entity;
+using BusinessLayer;
 using DataLayer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApp.Controllers
 {
-    public class StoreController : Controller
+	[Authorize(Roles = "SuperAdmin")]
+	public class StoreController : Controller
     {
         private readonly IStoreService ss;
-        public StoreController(IStoreService ss)
+        private readonly DataDbContext db;
+        public StoreController(IStoreService ss, DataDbContext db)
         {
             this.ss = ss;
+            this.db = db;
+
         }
         // GET: StoreController
         public ActionResult Index()
@@ -46,7 +53,34 @@ namespace WebApp.Controllers
                 return View();
             }
         }
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddToCart(int id,int qty,Product p)
+        {
+            var cart=db.Carts.FirstOrDefault(x => x.Username==User.Identity.Name);
 
+            if (cart == null)
+            {
+                var c = new Cart()
+                {
+                    Username = User.Identity.Name
+                };
+                db.Carts.Add(c);
+                db.SaveChanges();
+                var result = ss.AddToCart(p, c, qty);
+                if (result != null)
+                    return RedirectToAction(nameof(Index));
+
+            }
+            else {
+                var result = ss.AddToCart(p,cart,qty);
+                if (result != null)
+                    return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index));
+            }
+            return RedirectToAction(nameof(Index));
+        }
         // GET: StoreController/Edit/5
         public ActionResult Edit(int id)
         {
