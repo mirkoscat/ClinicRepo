@@ -57,8 +57,9 @@ namespace BusinessLayer
         }
 
         public IEnumerable<Product> GetProducts() => db.Products.ToList();
+	
 
-        public IEnumerable<Product> GetProductsByDate(string date)
+		public IEnumerable<Product> GetProductsByDate(string date)
         {
             throw new NotImplementedException();
         }
