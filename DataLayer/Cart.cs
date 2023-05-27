@@ -16,7 +16,8 @@ namespace DataLayer
         public string Username { get; set; }
 		public string? StreetName { get; set; }
 		public DateTime? OrderDate { get; set; }
-		public Image? Picture { get; set; }
+		public byte[]? Picture { get; set; }
+		public string? FileExtension { get; set; }
 		public ICollection<ProductCart> ProductsInCart { get; set; }=new List<ProductCart>();
 
     }

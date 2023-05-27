@@ -45,25 +45,19 @@ namespace BusinessLayer
 
         public IEnumerable<MunicipalAnimal> GetMunicipalAnimals() => _context.MunicipalAnimals.ToList();
 
-        public IEnumerable<MunicipalAnimal> GetMunicipalAnimalsInRecovery()
+        public IEnumerable<MunicipalVisit> GetMunicipalVisitsInRecovery()
         {//work in progress
-            var animals = _context.MunicipalAnimals.Where(x => x.IsInHospital == true);
-          //  var visits = db.MunicipalVisits.Where(x=>x.Status==(RecoveryStatus)1);
-            return animals;
-        }
+            var visits = _context.MunicipalVisits.Where(x=>x.Status==(RecoveryStatus)1);
+			return visits;
+		}
 
         public MunicipalVisit GetMunicipalVisitById(int id)
         {
             var animal = _context.MunicipalAnimals.Include(a => a.MunicipalVisits).FirstOrDefault(a => a.Id == id);
-
-
             var visit = animal.MunicipalVisits.FirstOrDefault(a => a.Id == id);
             return visit;
 
         }
-        //public IEnumerable<MunicipalVisit> GetMunicipalVisitsByAnimal(int id) { 
-        //var animal=GetMunicipalAnimalById(id);
-        
-        //}
+      
     }
 }
