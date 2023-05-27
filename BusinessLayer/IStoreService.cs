@@ -15,7 +15,7 @@ namespace BusinessLayer
 		IEnumerable<Product> GetProductsByDate(string date);
 		bool AddToCart(Product p, Cart c, int qty);
 		bool DeleteToCart();
-		bool Checkout(Cart c, List<ProductCart> list);
+		bool Checkout(Cart c, List<ProductCart> list,string street);
 	
 	}
 }

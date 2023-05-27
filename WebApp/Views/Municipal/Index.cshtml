@@ -1,17 +1,39 @@
-﻿@using DataLayer;
+﻿@model WebApp.Models.MunicipalIndexViewModel
 
-@model IEnumerable<MunicipalAnimal>
-@{
-	var total = 0;
-
-}
 <a asp-controller="Municipal" asp-action="CreateMunAnimal" class="btn btn-primary">Create Municipal Animal</a>
-@if (Model.Any())
-{
+@if (Model.Visits.Any())
+{<p>List of animals in recovery</p>
 	<div class="containeranimals  py-3 px-3">
 
 
-		@foreach (var a in Model)
+		@foreach (var visit in Model.Visits.OrderByDescending(x=>x.VisitDate))
+		{
+
+			<div class="card" style="width: 18rem;margin-right:50px;margin-bottom:20px;">
+				<img class="card-img-top" src="@Url.Action("GetImage", "Municipal", new { id=visit.MunicipalAnimals.FirstOrDefault()?.Id })" >
+				<div class="card-body">
+					<h5 class="card-title">@visit.MunicipalAnimals.FirstOrDefault()?.Name</h5>
+					<p class="card-text">Status @visit.Status</p>
+				
+				</div>
+			</div>
+
+		}
+	</div>
+
+}
+else
+{
+
+	<div class="bg-warning text-danger">No Data</div>
+}
+
+@if (Model.Animals.Any())
+{<p>List of municipal animals:</p>
+	<div class="containeranimals  py-3 px-3">
+
+
+		@foreach (var a in Model.Animals)
 		{
 
 			<div class="card" style="width: 18rem;margin-right:50px;margin-bottom:20px;">
@@ -20,8 +42,8 @@
 					<h5 class="card-title">@a.Name</h5>
 					<p class="card-text">In Ospital? @a.IsInHospital</p>
 					<p>
-						@Html.ActionLink("Nuova Visita", "NewMunicipalVisit", "Municipal",new { id = a.Id }, new { @class = "btn btn-warning" })
-						@Html.ActionLink("Dettagli Ricovero", "MADetails", "Municipal",new { id = a.Id }, new { @class = "btn btn-warning" })
+						@Html.ActionLink("New Visit", "NewMunicipalVisit", "Municipal",new { id = a.Id }, new { @class = "btn btn-warning" })
+						@Html.ActionLink("Details", "MADetails", "Municipal",new { id = a.Id }, new { @class = "btn btn-warning" })
 					</p>
 				</div>
 			</div>

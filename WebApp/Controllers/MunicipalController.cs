@@ -21,16 +21,16 @@ namespace WebApp.Controllers
         }
 		// GET: MunicipalController
 		public ActionResult Index()
-		{// must create model
-            var list = _munService.GetMunicipalAnimals().Where(x=>x.IsInHospital==true);
-            //var list = _munService.GetMunicipalVisitsInRecovery().ToList();
-            //var animals = _munService.GetMunicipalAnimals().Where(x=>x.IsInHospital==true).ToList();
-            //var model = new MunicipalIndexViewModel { 
-            //Visits=list,
-            //Animals=animals
-            //};
+		{
+            var list = _munService.GetMunicipalVisitsInRecovery().OrderByDescending(x=>x.VisitDate).ToList();
+            var animals = _munService.GetMunicipalAnimals().Where(x => x.IsInHospital == true).ToList();
+            var model = new MunicipalIndexViewModel
+            {
+                Visits = list,
+                Animals = animals
+            };
 
-			return View(list);
+            return View(model);
 		}
 		public ActionResult NewMunicipalVisit(int id)
 		{
