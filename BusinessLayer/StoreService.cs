@@ -42,10 +42,17 @@ namespace BusinessLayer
             return true;
         }
 
-		public bool Checkout(Cart c, List<ProductCart> list)
-		{
-			throw new NotImplementedException();
+		public bool Checkout(Cart c, List<ProductCart> list, string street)
+		{//not complete
+            c.StreetName = street;
+			foreach (var productcart in list)
+            {
+                c.ProductsInCart.Add(productcart);
+            }
+            _context.SaveChanges();
+            return true;
 		}
+
 
 		public bool CreateProduct(Product p)
         {

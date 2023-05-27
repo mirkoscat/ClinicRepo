@@ -1,5 +1,6 @@
 ﻿
 
+using BusinessLayer;
 using DataLayer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -12,16 +13,18 @@ namespace WebApp.Controllers
 	public class CartController : Controller
     {
 		
-		private readonly DataDbContext db;
-        public CartController(DataDbContext db)
+		private readonly DataDbContext _context;
+		private readonly IStoreService _storeService;
+        public CartController(DataDbContext db, IStoreService ss)
         {
-            this.db = db;
+            _context = db;
+            _storeService = ss;
         }
         // GET: CartController
         public ActionResult Index()
         {
-            var cart = db.Carts.FirstOrDefault(x=>x.Username==User.Identity.Name);
-            var list=db.ProductCarts.Include(nameof(Product)).ToList();
+            var cart = _context.Carts.FirstOrDefault(x=>x.Username==User.Identity.Name);
+            var list=_context.ProductCarts.Include(nameof(Product)).ToList();
             var model = new CartViewModel
             {
                 ProductCartList = list,
@@ -35,9 +38,9 @@ namespace WebApp.Controllers
 
             var id = long.Parse(form["id"]);
             var qty = int.Parse(form["qty"]);
-            var productInCart = db.ProductCarts.FirstOrDefault(x => x.Product.Id == id);
+            var productInCart = _context.ProductCarts.FirstOrDefault(x => x.Product.Id == id);
             productInCart.Quantity = qty;
-            db.SaveChanges();
+            _context.SaveChanges();
             return RedirectToAction("Index","Cart");
         }
 
@@ -48,6 +51,10 @@ namespace WebApp.Controllers
 		{
 			try
 			{
+                var cart = model.Cart;
+                var list = model.ProductCartList.ToList();
+                var street = model.StreetName;
+                var result = _storeService.Checkout(cart,list,street);
 				return RedirectToAction(nameof(Index));
 			}
 			catch
