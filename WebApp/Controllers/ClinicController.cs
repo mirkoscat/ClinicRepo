@@ -19,7 +19,7 @@ namespace WebApp.Controllers
 
         public ClinicController(IClinicService cs)
 		{
-			this._clinicService = cs;
+			_clinicService = cs;
 		
 
 		}

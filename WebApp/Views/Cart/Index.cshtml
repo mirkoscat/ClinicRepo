@@ -44,7 +44,7 @@ else
 	<div class="bg-warning text-danger">No products</div>
 }
 <div class="container">
-	<form method="post" enctype="multipart/form-data">
+	<form method="post" asp-controller="Cart" asp-action="CheckOut" enctype="multipart/form-data">
 		<label>Street</label>
 		<br />
 		<input type="text" required />

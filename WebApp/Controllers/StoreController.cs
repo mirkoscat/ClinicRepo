@@ -88,8 +88,11 @@ namespace WebApp.Controllers
             }
             return RedirectToAction(nameof(Index));
         }
-        // GET: StoreController/Edit/5
-        public ActionResult Edit(int id)
+
+	
+
+		// GET: StoreController/Edit/5
+		public ActionResult Edit(int id)
         {
             return View();
         }

@@ -1,0 +1,37 @@
+﻿
+
+@model WebApp.Models.MunicipalIndexViewModel
+@{
+	var total = 0;
+
+}
+<a asp-controller="Municipal" asp-action="CreateMunAnimal" class="btn btn-primary">Create Municipal Animal</a>
+@if (Model.Animals.Any())
+{
+	<div class="containeranimals  py-3 px-3">
+
+
+		@foreach (var a in Model.Animals)
+		{
+
+			<div class="card" style="width: 18rem;margin-right:50px;margin-bottom:20px;">
+				<img class="card-img-top" src="@Url.Action("GetImage", "Municipal", new { id=a.Id })" alt="@a.Name">
+				<div class="card-body">
+					<h5 class="card-title">@a.Name</h5>
+					<p class="card-text">In Recovery? @a.IsInHospital</p>
+					<p>
+						@Html.ActionLink("Nuova Visita", "NewMunicipalVisit", "Municipal",new { id = a.Id }, new { @class = "btn btn-warning" })
+						@Html.ActionLink("Dettagli Ricovero", "MADetails", "Municipal",new { id = a.Id }, new { @class = "btn btn-warning" })
+					</p>
+				</div>
+			</div>
+
+		}
+	</div>
+
+}
+else
+{
+
+	<div class="bg-warning text-danger">No Data</div>
+}

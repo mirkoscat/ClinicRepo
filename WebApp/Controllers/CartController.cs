@@ -40,8 +40,24 @@ namespace WebApp.Controllers
             db.SaveChanges();
             return RedirectToAction("Index","Cart");
         }
-        // GET: CartController/Details/5
-        public ActionResult Details(int id)
+
+
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public ActionResult Checkout(CartViewModel model)
+		{
+			try
+			{
+				return RedirectToAction(nameof(Index));
+			}
+			catch
+			{
+				return View();
+			}
+		}
+
+		// GET: CartController/Details/5
+		public ActionResult Details(int id)
         {
             return View();
         }
