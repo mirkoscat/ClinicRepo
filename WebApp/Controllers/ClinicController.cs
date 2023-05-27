@@ -13,20 +13,20 @@ namespace WebApp.Controllers
 	
 	public class ClinicController : Controller
 	{
-		private readonly IClinicService cs;
-		private readonly IMunicipalService ms;
+		private readonly IClinicService _clinicService;
+		
 
 
-        public ClinicController(IClinicService cs, IMunicipalService ms)
+        public ClinicController(IClinicService cs)
 		{
-			this.cs = cs;
-			this.ms = ms;
+			this._clinicService = cs;
+		
 
 		}
 		// GET: ClinicController
 		public ActionResult Index()
 		{
-			var list = cs.GetClinicAnimals();
+			var list = _clinicService.GetClinicAnimals();
 			return View(list);
 		}
 
@@ -44,7 +44,7 @@ namespace WebApp.Controllers
 			if (ModelState.IsValid)
 			{
 
-				var result = cs.CreateClinicAnimal(ca);
+				var result = _clinicService.CreateClinicAnimal(ca);
 				if (result != false)
 					return RedirectToAction(nameof(Index));
 			}
@@ -55,8 +55,8 @@ namespace WebApp.Controllers
 
         public ActionResult CADetails(int id)
 		{
-			var animal=cs.GetClinicAnimalById(id);
-			var visite= cs.GetClinicVisitsById(id).ToList();
+			var animal=_clinicService.GetClinicAnimalById(id);
+			var visite= _clinicService.GetClinicVisitsById(id).ToList();
 			var model = new CADetailsViewModel
 			{
 				ClinicAnimal = animal,
@@ -67,7 +67,7 @@ namespace WebApp.Controllers
 		}
 		public ActionResult NewClinicVisit(int id)
 		{
-			var animal= cs.GetClinicAnimalById(id);
+			var animal= _clinicService.GetClinicAnimalById(id);
 
 			var model = new NCVisitViewModel
 			{
@@ -94,7 +94,7 @@ namespace WebApp.Controllers
 				DescriptionBeforeVisit=model.ClinicVisit.DescriptionBeforeVisit				
 				};
 				
-				var result = cs.CreateClinicVisit(id ,x);
+				var result = _clinicService.CreateClinicVisit(id ,x);
 				if(result != false)
 
 				return RedirectToAction("Index","Clinic");
@@ -106,7 +106,7 @@ namespace WebApp.Controllers
 		// GET: ClinicController/Delete/5
 		public ActionResult Delete(int id)
 		{
-			var result = cs.DeleteClinicAnimal(id);
+			var result = _clinicService.DeleteClinicAnimal(id);
 			if (result != false)
 				return RedirectToAction(nameof(Index));
 			return View();

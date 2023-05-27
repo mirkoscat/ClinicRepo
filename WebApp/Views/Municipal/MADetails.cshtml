@@ -2,10 +2,11 @@
 @model WebApp.Models.MADetailsViewModel
 @{
 	var count = Model.MunicipalVisits.Where(m => m.Status ==(RecoveryStatus)1).Count();
-	var somma = Model.MunicipalVisits.Where(m => m.PaymentDate.Month==5).Sum(m => m.Price);
+	var somma = Model.MunicipalVisits.Where(m => m.PaymentDate.Month == DateTime.Today.Month).Sum(m => m.Price);
+	var month = DateTime.Today.ToString("MMMM");
 	var tot =0;
 }
-<p>@Model.MunicipalAnimal.Name ha subìto @count ricoveri e in questo mese si sono spesi @somma euro per lui</p>
+<p>@Model.MunicipalAnimal.Name had @count recoveries,municipal kennel spent @somma euros for him this month of :  @month</p>
 
 
 <p>Lista visite di: <strong>@Model.MunicipalAnimal.Name</strong></p>
@@ -24,5 +25,5 @@
 }
 else
 {
-	<div class="bg-warning text-danger">Nessuna Visita</div>
+	<div class="bg-warning text-danger">No visits</div>
 }

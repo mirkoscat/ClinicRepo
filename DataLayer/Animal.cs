@@ -14,6 +14,8 @@ namespace DataLayer
         [Required]
         [StringLength(50)]
         public string Typology { get; set; } = String.Empty;
+
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime? BirthDate { get; set; }
         [Required]
         public DateTime RegistrationDate { get; set;}

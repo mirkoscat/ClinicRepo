@@ -8,7 +8,7 @@ using WebApp.Models;
 
 namespace WebApp.Controllers
 {
-	[Authorize(Roles = "SuperAdmin")]
+	//[Authorize(Roles = "SuperAdmin")]
 	public class CartController : Controller
     {
 		

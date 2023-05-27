@@ -14,21 +14,21 @@ namespace WebApp.Controllers
 	public class MunicipalController : Controller
     {
         private static int fileCounter = 0;
-        private readonly IMunicipalService ms;
+        private readonly IMunicipalService _munService;
         public MunicipalController(IMunicipalService ms)
         {
-            this.ms = ms;
+            _munService = ms;
         }
 		// GET: MunicipalController
 		public ActionResult Index()
 		{
-			var list = ms.GetMunicipalAnimals().Where(x=>x.IsInHospital==true);
+			var list = _munService.GetMunicipalAnimals().Where(x=>x.IsInHospital==true);
             
 			return View(list);
 		}
 		public ActionResult NewMunicipalVisit(int id)
 		{
-			var animal = ms.GetMunicipalAnimalById(id);
+			var animal = _munService.GetMunicipalAnimalById(id);
 
             var model = new NMVisitViewModel
             {
@@ -47,7 +47,7 @@ namespace WebApp.Controllers
         [HttpPost]
         public ActionResult NewMunicipalVisit(int id, NMVisitViewModel model)
         {
-                var animal = ms.GetMunicipalAnimalById(id);
+                var animal = _munService.GetMunicipalAnimalById(id);
 
                 var x = new MunicipalVisit()
                 {
@@ -63,7 +63,7 @@ namespace WebApp.Controllers
                  
                 };
               
-               ms.CreateMunicipalVisit(animal.Id, x);
+               _munService.CreateMunicipalVisit(animal.Id, x);
                 
 
                return RedirectToAction("Index", "Municipal");
@@ -71,7 +71,7 @@ namespace WebApp.Controllers
         }
 		public ActionResult MADetails(int id)
 		{
-			var animal = ms.GetMunicipalAnimalById(id);
+			var animal = _munService.GetMunicipalAnimalById(id);
 			var visite = animal.MunicipalVisits.OrderByDescending(x=>x.VisitDate).ToList();
 			var model = new MADetailsViewModel
 			{
@@ -84,7 +84,7 @@ namespace WebApp.Controllers
         [AllowAnonymous]
 		public IActionResult GetImage(int id)
         {
-            var img = ms.GetImageById(id);
+            var img = _munService.GetImageById(id);
 			return File(img.Data,img.Extension);
         }
 
@@ -129,7 +129,7 @@ namespace WebApp.Controllers
                    
                 };
 
-                var result = ms.CreateMunicipalAnimal(municipalAnimal);
+                var result = _munService.CreateMunicipalAnimal(municipalAnimal);
                 if (result)
                     return RedirectToAction(nameof(Index));
             }

@@ -11,6 +11,7 @@ namespace DataLayer
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         [Required]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime VisitDate { get; set; }
         [Required]
         [StringLength(100)]
