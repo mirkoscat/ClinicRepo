@@ -8,12 +8,12 @@ namespace WebApp.Controllers
 	public class HomeController : Controller
 	{
 		private readonly ILogger<HomeController> _logger;
-		private readonly IClinicService cs;
+		private readonly IClinicService _clinicService;
 
 		public HomeController(ILogger<HomeController> logger, IClinicService cs)
 		{
 			_logger = logger;
-			this.cs = cs;
+			_clinicService = cs;
 		}
 
 		public IActionResult Index()
@@ -24,7 +24,7 @@ namespace WebApp.Controllers
         {
 			if (id != null) {
 				
-			var animal=cs.GetAnimalByChip(id);
+			var animal=_clinicService.GetAnimalByChip(id);
 			return View(animal);
             }
             return View();

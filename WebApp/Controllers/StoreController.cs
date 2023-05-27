@@ -11,18 +11,18 @@ namespace WebApp.Controllers
     [Authorize(Roles = "SuperAdmin")]
     public class StoreController : Controller
     {
-        private readonly IStoreService ss;
+        private readonly IStoreService _storeService;
         private readonly DataDbContext db;
         public StoreController(IStoreService ss, DataDbContext db)
         {
-            this.ss = ss;
+            _storeService = ss;
             this.db = db;
 
         }
         // GET: StoreController
         public ActionResult Index()
         {
-            var list = ss.GetProducts().ToList();
+            var list = _storeService.GetProducts().ToList();
             return View(list);
         }
 
@@ -45,7 +45,7 @@ namespace WebApp.Controllers
         {
             try
             {
-                var result = ss.CreateProduct(p);
+                var result = _storeService.CreateProduct(p);
                 if (result != null)
                     return RedirectToAction(nameof(Index));
                 return View(p);
@@ -59,7 +59,7 @@ namespace WebApp.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult AddToCart(int id, int qty, Product p)
-        {
+        {//need changes, should not call db in controller
             var cart = db.Carts.FirstOrDefault(x => x.Username == User.Identity.Name);
             var product = db.Products.Single(x => x.Id == id);
 
@@ -72,14 +72,14 @@ namespace WebApp.Controllers
                 };
                 db.Carts.Add(c);
                 db.SaveChanges();
-                var result = ss.AddToCart(product, c, qty);
+                var result = _storeService.AddToCart(product, c, qty);
                 if (result != null)
                     return RedirectToAction(nameof(Index));
 
             }
             else
             {
-                var result = ss.AddToCart(product, cart, qty);
+                var result = _storeService.AddToCart(product, cart, qty);
 
                 if (result != null)
                     return RedirectToAction(nameof(Index));

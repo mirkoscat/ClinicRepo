@@ -10,24 +10,24 @@ namespace BusinessLayer
 {
     public class MunicipalService : IMunicipalService
     {
-        private readonly DataDbContext db;
+        private readonly DataDbContext _context;
         public MunicipalService(DataDbContext db)
         {
-            this.db = db;
+            _context = db;
         }
         public bool CreateMunicipalAnimal(MunicipalAnimal ma)
         {//modificare
-            db.Animals.Add(ma);
+            _context.Animals.Add(ma);
 
-            db.SaveChanges();
+            _context.SaveChanges();
             return true;
         }
 
         public bool CreateMunicipalVisit(int id, MunicipalVisit cv)
         {
-            var animal = db.MunicipalAnimals.Single(x => x.Id == id);
+            var animal = _context.MunicipalAnimals.Single(x => x.Id == id);
             animal.MunicipalVisits.Add(cv);
-            db.SaveChanges();
+            _context.SaveChanges();
             return true;
         }
 
@@ -38,23 +38,23 @@ namespace BusinessLayer
 
         public Image GetImageById(int id)
         {
-            var x = db.MunicipalAnimals.Single(x => x.Id == id);
+            var x = _context.MunicipalAnimals.Single(x => x.Id == id);
             return new Image { Data = x.Picture, Extension = x.FileExtension };
         }
-        public MunicipalAnimal GetMunicipalAnimalById(int id) => db.MunicipalAnimals.Include(x => x.MunicipalVisits).Single(x => x.Id == id);
+        public MunicipalAnimal GetMunicipalAnimalById(int id) => _context.MunicipalAnimals.Include(x => x.MunicipalVisits).Single(x => x.Id == id);
 
-        public IEnumerable<MunicipalAnimal> GetMunicipalAnimals() => db.MunicipalAnimals.ToList();
+        public IEnumerable<MunicipalAnimal> GetMunicipalAnimals() => _context.MunicipalAnimals.ToList();
 
         public IEnumerable<MunicipalAnimal> GetMunicipalAnimalsInRecovery()
         {//work in progress
-            var animals = db.MunicipalAnimals.Where(x => x.IsInHospital == true);
+            var animals = _context.MunicipalAnimals.Where(x => x.IsInHospital == true);
           //  var visits = db.MunicipalVisits.Where(x=>x.Status==(RecoveryStatus)1);
             return animals;
         }
 
         public MunicipalVisit GetMunicipalVisitById(int id)
         {
-            var animal = db.MunicipalAnimals.Include(a => a.MunicipalVisits).FirstOrDefault(a => a.Id == id);
+            var animal = _context.MunicipalAnimals.Include(a => a.MunicipalVisits).FirstOrDefault(a => a.Id == id);
 
 
             var visit = animal.MunicipalVisits.FirstOrDefault(a => a.Id == id);

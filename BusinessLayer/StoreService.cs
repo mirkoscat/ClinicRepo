@@ -13,14 +13,14 @@ namespace BusinessLayer
 {
     public class StoreService : IStoreService
     {
-        private readonly DataDbContext db;
+        private readonly DataDbContext _context;
         public StoreService(DataDbContext db)
         {
-            this.db = db;
+            _context = db;
         }
         public bool AddToCart(Product p, Cart c, int qty)
         {
-            var prodcartcheck = db.ProductCarts.Any(x => x.Product.Id == p.Id);
+            var prodcartcheck = _context.ProductCarts.Any(x => x.Product.Id == p.Id);
 
             if (!prodcartcheck)
             {
@@ -30,24 +30,27 @@ namespace BusinessLayer
                     Cart = c,
                     Product = p
                 };
-                db.ProductCarts.Add(prodotto);
+                _context.ProductCarts.Add(prodotto);
             }
             else
             {
-                var productcart = db.ProductCarts.FirstOrDefault(x => x.Product.Id == p.Id);
+                var productcart = _context.ProductCarts.FirstOrDefault(x => x.Product.Id == p.Id);
                 productcart.Quantity += qty;
             }
 
-            db.SaveChanges();
+            _context.SaveChanges();
             return true;
         }
 
-        
+		public bool Checkout(Cart c, List<ProductCart> list)
+		{
+			throw new NotImplementedException();
+		}
 
-        public bool CreateProduct(Product p)
+		public bool CreateProduct(Product p)
         {
-            db.Products.Add(p);
-            db.SaveChanges();
+            _context.Products.Add(p);
+            _context.SaveChanges();
             return true;
         }
 
@@ -56,7 +59,7 @@ namespace BusinessLayer
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Product> GetProducts() => db.Products.ToList();
+        public IEnumerable<Product> GetProducts() => _context.Products.ToList();
 	
 
 		public IEnumerable<Product> GetProductsByDate(string date)

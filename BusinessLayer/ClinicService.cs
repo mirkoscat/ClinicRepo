@@ -12,32 +12,32 @@ namespace BusinessLayer
 {
 	public class ClinicService : IClinicService
 	{
-		private readonly DataDbContext db;
+		private readonly DataDbContext _context;
         public ClinicService(DataDbContext db)
         {
-            this.db = db;
+            _context = db;
         }
         public bool CreateClinicAnimal(ClinicAnimal ca)
 		{
-			db.Animals.Add(ca);
-			db.SaveChanges();
+			_context.Animals.Add(ca);
+			_context.SaveChanges();
 			return true;
 		}
 
 		public bool DeleteClinicAnimal(int id)
         { 
-			var animal= db.Animals.FirstOrDefault(c => c.Id==id);
-			db.Animals.Remove(animal);
-			db.SaveChanges();
+			var animal= _context.Animals.FirstOrDefault(c => c.Id==id);
+			_context.Animals.Remove(animal);
+			_context.SaveChanges();
 			return true;
 
 		}
 
-		public ClinicAnimal GetClinicAnimalById(int id) => db.ClinicAnimals.Single(x=>x.Id==id);
-        public IEnumerable<ClinicAnimal> GetClinicAnimals() => db.ClinicAnimals.ToList();
+		public ClinicAnimal GetClinicAnimalById(int id) => _context.ClinicAnimals.Single(x=>x.Id==id);
+        public IEnumerable<ClinicAnimal> GetClinicAnimals() => _context.ClinicAnimals.ToList();
         public IEnumerable<ClinicVisit> GetClinicVisitsById(int id)
         {
-			var animal = db.ClinicAnimals.Include(a => a.ClinicVisits).FirstOrDefault(a => a.Id == id);
+			var animal = _context.ClinicAnimals.Include(a => a.ClinicVisits).FirstOrDefault(a => a.Id == id);
 
 			if (animal != null)
 			{
@@ -51,8 +51,8 @@ namespace BusinessLayer
 		public AllAnimals GetAnimalByChip(string chip) {
 			var animals= new AllAnimals();	
 			
-			animals.ClinicAnimal = db.ClinicAnimals.FirstOrDefault(x => x.MicrochipNumber == chip);
-            animals.MunicipalAnimal = db.MunicipalAnimals.FirstOrDefault(x => x.MicrochipNumber == chip);
+			animals.ClinicAnimal = _context.ClinicAnimals.FirstOrDefault(x => x.MicrochipNumber == chip);
+            animals.MunicipalAnimal = _context.MunicipalAnimals.FirstOrDefault(x => x.MicrochipNumber == chip);
 
 			return animals;
 
@@ -62,9 +62,9 @@ namespace BusinessLayer
 
         public bool CreateClinicVisit(int id,ClinicVisit cv)
         {
-			var animal = db.ClinicAnimals.Single(x=>x.Id==id);
+			var animal = _context.ClinicAnimals.Single(x=>x.Id==id);
 			animal.ClinicVisits.Add(cv);	
-			db.SaveChanges();
+			_context.SaveChanges();
 			return true;
         }
 

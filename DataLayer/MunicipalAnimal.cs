@@ -7,8 +7,10 @@ namespace DataLayer
 	public class MunicipalAnimal:Animal
 	{
         [Required]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime RecoveryStart { get; set; }
         [Required]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime RecoveryEnd { get; set;}
         [Required]
         public byte[]? Picture { get; set; }

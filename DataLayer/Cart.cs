@@ -14,7 +14,10 @@ namespace DataLayer
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string Username { get; set; }
-        public ICollection<ProductCart> ProductsInCart { get; set; }=new List<ProductCart>();
+		public string? StreetName { get; set; }
+		public DateTime? OrderDate { get; set; }
+		public Image? Picture { get; set; }
+		public ICollection<ProductCart> ProductsInCart { get; set; }=new List<ProductCart>();
 
     }
 }
