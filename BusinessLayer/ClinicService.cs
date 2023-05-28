@@ -68,21 +68,19 @@ namespace BusinessLayer
 			return true;
         }
 
-		public bool EditClinicAnimal(int id)
-		{
-			throw new NotImplementedException();
-		}
 
-		//public bool EditClinicAnimal(int id,ClinicAnimal clinicAnimal)
-		//{
-		//	var animal = _context.ClinicAnimals.Single(x => x.Id == id);
-		//	animal.Name = clinicAnimal.Name;
-		//	animal.OwnerLastName = clinicAnimal.OwnerLastName;
-		//	animal.HasMicrochip = clinicAnimal.HasMicrochip;
-		//	animal.MicrochipNumber= clinicAnimal.MicrochipNumber;
-		////not complete
-		//	throw new NotImplementedException();
-		//}
+
+		public bool EditClinicAnimal(int id, ClinicAnimal clinicAnimal)
+		{
+			var animal = _context.ClinicAnimals.Single(x => x.Id == id);
+			animal.Name = clinicAnimal.Name;
+			animal.OwnerName= clinicAnimal.OwnerName;
+			animal.OwnerLastName = clinicAnimal.OwnerLastName;
+			animal.HasMicrochip = clinicAnimal.HasMicrochip;
+			animal.MicrochipNumber = clinicAnimal.MicrochipNumber;
+			_context.SaveChanges();
+			return true;
+		}
 
 
 	}
