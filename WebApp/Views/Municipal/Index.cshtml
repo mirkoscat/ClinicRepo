@@ -6,7 +6,7 @@
 	<div class="containeranimals  py-3 px-3">
 
 
-		@foreach (var visit in Model.Visits.OrderByDescending(x=>x.VisitDate))
+		@foreach (var visit in Model.Visits)
 		{
 
 			<div class="card" style="width: 18rem;margin-right:50px;margin-bottom:20px;">
@@ -43,7 +43,8 @@ else
 					<p class="card-text">In Ospital? @a.IsInHospital</p>
 					<p>
 						@Html.ActionLink("New Visit", "NewMunicipalVisit", "Municipal",new { id = a.Id }, new { @class = "btn btn-warning" })
-						@Html.ActionLink("Details", "MADetails", "Municipal",new { id = a.Id }, new { @class = "btn btn-warning" })
+						@Html.ActionLink("Recoveries Details", "MADetails", "Municipal",new { id = a.Id }, new { @class = "btn btn-warning" })
+						@Html.ActionLink("Edit MunicipalAnimal", "EditMA", "Municipal",new { id = a.Id }, new { @class = "btn btn-warning" })
 					</p>
 				</div>
 			</div>

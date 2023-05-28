@@ -84,9 +84,6 @@ namespace WebApp.Controllers
 			};
 
 			return View(model);
-
-
-
 		}
 		[HttpPost]
 		public ActionResult NewClinicVisit(int id, NCVisitViewModel model)
@@ -136,7 +133,7 @@ namespace WebApp.Controllers
 				Name =updateClinicAnimal.ClinicAnimal.Name,
 				OwnerName=updateClinicAnimal.ClinicAnimal.OwnerName,
 				OwnerLastName=updateClinicAnimal.ClinicAnimal.OwnerLastName,
-				HasMicrochip=updateClinicAnimal.ClinicAnimal.HasMicrochip,//=false?
+				HasMicrochip=updateClinicAnimal.ClinicAnimal.HasMicrochip,
 				MicrochipNumber=updateClinicAnimal.ClinicAnimal.MicrochipNumber	
 			};
 			var result = _clinicService.EditClinicAnimal(id, newClinicAnimal);

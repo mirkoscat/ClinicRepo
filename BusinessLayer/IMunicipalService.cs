@@ -18,6 +18,6 @@ namespace BusinessLayer
 		bool CreateMunicipalVisit(int id, MunicipalVisit cv);
 
 		IEnumerable<MunicipalVisit> GetMunicipalVisitsInRecovery();
-		
-	}
+        bool EditMunicipalAnimal(int id, MunicipalAnimal municipalAnimal);
+    }
 }
