@@ -2,7 +2,7 @@
 
 <a asp-controller="Municipal" asp-action="CreateMunAnimal" class="btn btn-primary">Create Municipal Animal</a>
 @if (Model.Visits.Any())
-{<p>List of animals in recovery</p>
+{<p>List of municipal visits with active recovery</p>
 	<div class="containeranimals  py-3 px-3">
 
 
@@ -14,6 +14,7 @@
 				<div class="card-body">
 					<h5 class="card-title">@visit.MunicipalAnimals.FirstOrDefault()?.Name</h5>
 					<p class="card-text">Status @visit.Status</p>
+					<p class="card-text">Visit Date: @visit.VisitDate</p>
 				
 				</div>
 			</div>
@@ -29,7 +30,7 @@ else
 }
 
 @if (Model.Animals.Any())
-{<p>List of municipal animals:</p>
+{<p>List of municipal animals :</p>
 	<div class="containeranimals  py-3 px-3">
 
 
@@ -40,7 +41,7 @@ else
 				<img class="card-img-top" src="@Url.Action("GetImage", "Municipal", new { id=a.Id })" alt="@a.Name">
 				<div class="card-body">
 					<h5 class="card-title">@a.Name</h5>
-					<p class="card-text">In Ospital? @a.IsInHospital</p>
+					<p class="card-text">In Hospital? @a.IsInHospital</p>
 					<p>
 						@Html.ActionLink("New Visit", "NewMunicipalVisit", "Municipal",new { id = a.Id }, new { @class = "btn btn-warning" })
 						@Html.ActionLink("Recoveries Details", "MADetails", "Municipal",new { id = a.Id }, new { @class = "btn btn-warning" })

@@ -19,7 +19,7 @@
 					<p class="card-text">Usage: @p.Usage</p>
 					<form asp-controller="Store" asp-action="AddToCart" asp-route-id="@p.Id">
 						<input min="1" max="10" type="number" name="qty" />
-						<button type="submit" class="btn btn-info">Add</button>
+						<button id="MyButton" type="submit" class="btn btn-info">Add</button>
 					</form>
 
 				</div>
@@ -30,4 +30,10 @@
 else
 {
 	<div class="bg-warning text-danger">No Products</div>
+}
+@section Scripts{
+	<script>
+		
+
+	</script>
 }
