@@ -22,8 +22,8 @@ namespace WebApp.Controllers
 		// GET: MunicipalController
 		public ActionResult Index()
 		{
-            var list = _munService.GetMunicipalVisitsInRecovery().OrderByDescending(x=>x.VisitDate).ToList();
-            var animals = _munService.GetMunicipalAnimals().Where(x => x.IsInHospital == true).ToList();
+            var list = _munService.GetMunicipalVisitsInRecovery().ToList();
+            var animals = _munService.GetMunicipalAnimals()/*.Where(x => x.IsInHospital == true)*/.ToList();
             var model = new MunicipalIndexViewModel
             {
                 Visits = list,
@@ -91,10 +91,30 @@ namespace WebApp.Controllers
 			return File(img.Data,img.Extension);
         }
 
-        // GET: MunicipalController/Details/5
-        public ActionResult Details(int id)
+        // GET: MunicipalController/EditMA/5
+        public ActionResult EditMA(int id)
         {
-            return View();
+            var animal = _munService.GetMunicipalAnimalById(id);
+            var model = new EditMunicipalAnimalViewModel { 
+           MunicipalAnimal=animal
+            };
+            return View(model);
+        }
+        [HttpPost]
+       
+        public ActionResult EditMA(int id,EditMunicipalAnimalViewModel updatedAnimal)
+        {
+            var municipalAnimal = new MunicipalAnimal() { 
+            Name=updatedAnimal.MunicipalAnimal.Name,
+            CoatColor=updatedAnimal.MunicipalAnimal.CoatColor,
+            RecoveryStart = updatedAnimal.MunicipalAnimal.RecoveryStart,
+            RecoveryEnd = updatedAnimal.MunicipalAnimal.RecoveryEnd,
+            IsInHospital=updatedAnimal.MunicipalAnimal.IsInHospital
+            };
+            var result = _munService.EditMunicipalAnimal(id, municipalAnimal);
+            if (result != false)
+                return RedirectToAction(nameof(Index));
+            return View(updatedAnimal);  
         }
 
         public ActionResult CreateMunAnimal()

@@ -55,6 +55,20 @@ namespace BusinessLayer
             return visit;
 
         }
-      
+
+        public bool EditMunicipalAnimal(int id, MunicipalAnimal municipalAnimal)
+        {
+            var animal = _context.MunicipalAnimals.Single(x => x.Id == id);
+            animal.Name = municipalAnimal.Name;
+            animal.RecoveryStart=municipalAnimal.RecoveryStart;
+            animal.RecoveryEnd=municipalAnimal.RecoveryEnd;
+            animal.IsInHospital=municipalAnimal.IsInHospital;
+            animal.HasMicrochip=municipalAnimal.HasMicrochip;
+            animal.MicrochipNumber=municipalAnimal.MicrochipNumber;
+            animal.CoatColor=municipalAnimal.CoatColor;
+            _context.SaveChanges();
+            return true;
+            
+        }
     }
 }

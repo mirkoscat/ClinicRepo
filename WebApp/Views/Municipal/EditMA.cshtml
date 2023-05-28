@@ -1,0 +1,72 @@
+﻿@using DataLayer;
+@model WebApp.Models.EditMunicipalAnimalViewModel
+
+@{
+    ViewData["Title"] = "EditMA";
+}
+
+<h1>EditMA</h1>
+
+<h4>EditMunicipalAnimalViewModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="EditMA">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="@Model.MunicipalAnimal.Name" class="control-label"></label>
+                <input asp-for="@Model.MunicipalAnimal.Name" class="form-control" />
+                <span asp-validation-for="@Model.MunicipalAnimal.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.MunicipalAnimal.CoatColor" class="control-label"></label>
+                <input asp-for="@Model.MunicipalAnimal.CoatColor" class="form-control" />
+                <span asp-validation-for="@Model.MunicipalAnimal.CoatColor" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.MunicipalAnimal.RecoveryStart" class="control-label"></label>
+                <input asp-for="@Model.MunicipalAnimal.RecoveryStart" class="form-control" />
+                <span asp-validation-for="@Model.MunicipalAnimal.RecoveryStart" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.MunicipalAnimal.RecoveryEnd" class="control-label"></label>
+                <input asp-for="@Model.MunicipalAnimal.RecoveryEnd" class="form-control" />
+                <span asp-validation-for="@Model.MunicipalAnimal.RecoveryEnd" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Is In Ospital ?</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox"  name="IsInHospital" value="true">
+                </div>
+                <span asp-validation-for="@Model.MunicipalAnimal.IsInHospital" class="text-danger"></span>
+            </div>
+           
+            <div class="form-group">
+                <label class="control-label">Has Microchip ?</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="HasMicrochip" name="HasMicrochip" value="true">
+                </div>
+                <span asp-validation-for="@Model.MunicipalAnimal.HasMicrochip" class="text-danger"></span>
+            </div>
+            <div id="showthings" style="display: none;">
+                <div class="form-group">
+                    <label asp-for="@Model.MunicipalAnimal.MicrochipNumber" class="control-label"></label>
+                    <input asp-for="@Model.MunicipalAnimal.MicrochipNumber" class="form-control" />
+                    <span asp-validation-for="@Model.MunicipalAnimal.MicrochipNumber" class="text-danger"></span>
+                </div>           
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    <script src="~/js/microchip.js" asp-append-version="true"></script>
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
