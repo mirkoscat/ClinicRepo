@@ -109,7 +109,9 @@ namespace WebApp.Controllers
             CoatColor=updatedAnimal.MunicipalAnimal.CoatColor,
             RecoveryStart = updatedAnimal.MunicipalAnimal.RecoveryStart,
             RecoveryEnd = updatedAnimal.MunicipalAnimal.RecoveryEnd,
-            IsInHospital=updatedAnimal.MunicipalAnimal.IsInHospital
+            IsInHospital=updatedAnimal.MunicipalAnimal.IsInHospital,
+            HasMicrochip=updatedAnimal.MunicipalAnimal.HasMicrochip,
+            MicrochipNumber=updatedAnimal.MunicipalAnimal.MicrochipNumber
             };
             var result = _munService.EditMunicipalAnimal(id, municipalAnimal);
             if (result != false)
