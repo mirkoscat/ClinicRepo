@@ -7,7 +7,8 @@ namespace WebApp.Models
 		public ICollection<ProductCart> ProductCartList { get; set; } = new List<ProductCart>();
 		public Cart Cart { get; set; }= new Cart();
 		public string? StreetName { get; set; }
-		public FormFile FormFilePicture { get; set; }
+		public byte[]? Picture { get; set; }
+		public string? FileExtension { get; set; }
 
 	}
 }

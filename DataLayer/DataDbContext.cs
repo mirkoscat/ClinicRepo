@@ -14,6 +14,7 @@ namespace DataLayer
         public DbSet<Product> Products { get; set; }
         public DbSet<Cart> Carts { get; set; }
         public DbSet<ProductCart> ProductCarts { get; set; }
+        //public DbSet<CheckOutOrder> CheckOutOrders { get; set; }
        
 
 

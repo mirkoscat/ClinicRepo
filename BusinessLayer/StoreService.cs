@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DataLayer;
 
-using DataLayer;
-using Microsoft.Identity.Client;
+using Microsoft.EntityFrameworkCore.Infrastructure.Internal;
 
 namespace BusinessLayer
 {
@@ -42,13 +35,26 @@ namespace BusinessLayer
             return true;
         }
 
-		public bool Checkout(Cart c, List<ProductCart> list, string street)
-		{//not complete
-            c.StreetName = street;
+		public bool Checkout(Cart c, List<ProductCart> list, string street, byte[]? picture, string? extension)
+		{
 			foreach (var productcart in list)
-            {
-                c.ProductsInCart.Add(productcart);
-            }
+			{
+				c.ProductsInCart.Add(productcart);
+			}
+            //var order = new CheckOutOrder()
+            //{
+            //    OrderDate = DateTime.Now,
+            //    StreetName = street,
+            //    Picture = picture,
+            //    FileExtension = extension,
+            //    ProductCarts = list,
+            //    Cart = c,
+            //    OrderStatus = (OrderStatus)1
+            //};
+
+            c.ProductsInCart.Clear();
+            //_context.CheckOutOrders.Add(order);
+
             _context.SaveChanges();
             return true;
 		}
