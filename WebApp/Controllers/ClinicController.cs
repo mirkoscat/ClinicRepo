@@ -10,24 +10,25 @@ using WebApp.Models;
 namespace WebApp.Controllers
 {
 	[Authorize(Roles = "SuperAdmin")]
-	
+
 	public class ClinicController : Controller
 	{
 		private readonly IClinicService _clinicService;
-		
 
 
-        public ClinicController(IClinicService cs)
+
+		public ClinicController(IClinicService cs)
 		{
 			_clinicService = cs;
-		
+
 
 		}
 		// GET: ClinicController
 		public ActionResult Index()
 		{
 			var list = _clinicService.GetClinicAnimals().ToList();
-			var model = new ClinicAnimalViewModel() {
+			var model = new ClinicAnimalViewModel()
+			{
 				ClinicAnimals = list
 			};
 			return View(model);
@@ -54,12 +55,12 @@ namespace WebApp.Controllers
 
 			return View(ca);
 		}
-		
 
-        public ActionResult CADetails(int id)
+
+		public ActionResult CADetails(int id)
 		{
-			var animal=_clinicService.GetClinicAnimalById(id);
-			var visite= _clinicService.GetClinicVisitsById(id).ToList();
+			var animal = _clinicService.GetClinicAnimalById(id);
+			var visite = _clinicService.GetClinicVisitsById(id).ToList();
 			var model = new CADetailsViewModel
 			{
 				ClinicAnimal = animal,
@@ -70,41 +71,43 @@ namespace WebApp.Controllers
 		}
 		public ActionResult NewClinicVisit(int id)
 		{
-			var animal= _clinicService.GetClinicAnimalById(id);
+			var animal = _clinicService.GetClinicAnimalById(id);
 
 			var model = new NCVisitViewModel
 			{
 				ClinicAnimal = animal,
-				ClinicVisit= new ClinicVisit() { 
-				VisitDate=DateTime.Today
+				ClinicVisit = new ClinicVisit()
+				{
+					VisitDate = DateTime.Today
 				}
 
 			};
 
 			return View(model);
-           
 
 
-        }
+
+		}
 		[HttpPost]
 		public ActionResult NewClinicVisit(int id, NCVisitViewModel model)
 		{
-		
-				var x = new ClinicVisit() { 
-				VisitDate= model.ClinicVisit.VisitDate,
-				ExamTypology= model.ClinicVisit.ExamTypology,
-				TreatmentDescription=model.ClinicVisit.TreatmentDescription,
-				DescriptionBeforeVisit=model.ClinicVisit.DescriptionBeforeVisit				
-				};
-				
-				var result = _clinicService.CreateClinicVisit(id ,x);
-				if(result != false)
 
-				return RedirectToAction("Index","Clinic");
-			
+			var clinicVisit = new ClinicVisit()
+			{
+				VisitDate = model.ClinicVisit.VisitDate,
+				ExamTypology = model.ClinicVisit.ExamTypology,
+				TreatmentDescription = model.ClinicVisit.TreatmentDescription,
+				DescriptionBeforeVisit = model.ClinicVisit.DescriptionBeforeVisit
+			};
+
+			var result = _clinicService.CreateClinicVisit(id, clinicVisit);
+			if (result != false)
+
+				return RedirectToAction("Index", "Clinic");
+
 			return View(model);
 		}
-	
+
 
 		// GET: ClinicController/Delete/5
 		public ActionResult Delete(int id)
@@ -115,14 +118,36 @@ namespace WebApp.Controllers
 			return View();
 		}
 		// GET: ClinicController/EditCA/5
-		//public ActionResult EditCA(int id, ClinicAnimalViewModel updateClinicAnimal)
-		//{
-		//	var result = _clinicService.EditClinicAnimal(id,updateClinicAnimal);
-		//	if (result != false)
-		//		return RedirectToAction(nameof(Index));
-		//	return View(updateClinicAnimal);
-		//}
+		public ActionResult EditCA(int id)
+		{
+			var animal = _clinicService.GetClinicAnimalById(id);
+
+			var model = new EditClinicAnimalViewModel()
+			{
+				ClinicAnimal = animal
+			};
+			return View(model);
+		}
+		[HttpPost]
+		public ActionResult EditCA(int id, EditClinicAnimalViewModel updateClinicAnimal)
+		{
+			var newClinicAnimal = new ClinicAnimal()
+			{
+				Name =updateClinicAnimal.ClinicAnimal.Name,
+				OwnerName=updateClinicAnimal.ClinicAnimal.OwnerName,
+				OwnerLastName=updateClinicAnimal.ClinicAnimal.OwnerLastName,
+				HasMicrochip=updateClinicAnimal.ClinicAnimal.HasMicrochip,//=false?
+				MicrochipNumber=updateClinicAnimal.ClinicAnimal.MicrochipNumber	
+			};
+			var result = _clinicService.EditClinicAnimal(id, newClinicAnimal);
+			if (result != false)
+				return RedirectToAction(nameof(Index));
+			return View(updateClinicAnimal);
+		}
 
 
 	}
+
+
+
 }
