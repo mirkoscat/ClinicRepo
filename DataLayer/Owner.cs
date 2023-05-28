@@ -14,12 +14,13 @@ namespace DataLayer
         public string Surname { get; set; }
         public string FiscalCode { get; set; }
         public Cart Cart { get; set; }= new Cart();
-        public bool HasAnimal { get; set; }=false;
+		public bool HasAnimal { get; set; }=false;
+	
 
 
 
-       
 
 
-    }
+
+	}
 }

@@ -47,24 +47,26 @@ namespace WebApp.Controllers
 
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public ActionResult Checkout(CartViewModel model)
-		{
-			try
-			{
+		public ActionResult CheckOut(CartViewModel model)
+        {
+            try
+            {
                 var cart = model.Cart;
                 var list = model.ProductCartList.ToList();
                 var street = model.StreetName;
-                var result = _storeService.Checkout(cart,list,street);
+                byte[]? picture = model.Picture;
+                string? ext = model.FileExtension;
+                var result = _storeService.Checkout(cart,list,street,picture,ext);
 				return RedirectToAction(nameof(Index));
-			}
-			catch
-			{
-				return View();
-			}
-		}
+        }
+            catch
+            {
+            	return View();
+    }
+}
 
-		// GET: CartController/Details/5
-		public ActionResult Details(int id)
+        // GET: CartController/Details/5
+        public ActionResult Details(int id)
         {
             return View();
         }
