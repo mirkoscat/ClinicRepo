@@ -55,7 +55,7 @@ namespace BusinessLayer
             return visit;
 
         }
-
+        public List<MunicipalVisit> GetMunicipalVisits(int id)=> _context.MunicipalVisits.Include(a => a.MunicipalAnimals.Where(x => x.Id == id)).ToList();
         public bool EditMunicipalAnimal(int id, MunicipalAnimal municipalAnimal)
         {
             var animal = _context.MunicipalAnimals.Single(x => x.Id == id);

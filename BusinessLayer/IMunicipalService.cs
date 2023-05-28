@@ -19,5 +19,6 @@ namespace BusinessLayer
 
 		IEnumerable<MunicipalVisit> GetMunicipalVisitsInRecovery();
         bool EditMunicipalAnimal(int id, MunicipalAnimal municipalAnimal);
+		List<MunicipalVisit> GetMunicipalVisits(int id);
     }
 }

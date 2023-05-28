@@ -33,6 +33,16 @@
                 <input asp-for="@Model.MunicipalAnimal.RecoveryEnd" class="form-control" />
                 <span asp-validation-for="@Model.MunicipalAnimal.RecoveryEnd" class="text-danger"></span>
             </div>
+            <div class="form-group">
+                <label asp-for="@Model.MunicipalVisit.Status" class="control-label"></label>
+                <select asp-for="@Model.MunicipalVisit.Status" class="form-control">
+                    @foreach (var statusValue in Enum.GetValues(typeof(RecoveryStatus)))
+                    {
+                        <option value="@statusValue" asp-for="@Model.MunicipalVisit.Status">@statusValue</option>
+                    }
+                </select>
+                <span asp-validation-for="@Model.MunicipalVisit.Status" class="text-danger"></span>
+            </div>
       
             <div class="form-group">
                 <label asp-for="@Model.MunicipalAnimal.IsInHospital" class="control-label">Is In Hospital?</label>
@@ -42,8 +52,6 @@
                 <span asp-validation-for="@Model.MunicipalAnimal.IsInHospital" class="text-danger"></span>
             </div>
 
-
-           
             <div class="form-group">
                 <label class="control-label">Has Microchip ?</label>
                 <div class="form-check">
