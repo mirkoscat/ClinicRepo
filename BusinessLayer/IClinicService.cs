@@ -12,11 +12,10 @@ namespace BusinessLayer
 		AllAnimals GetAnimalByChip(string chip);
 
         bool CreateClinicAnimal(ClinicAnimal ca);
+		//bool EditClinicAnimal(int id, ClinicAnimal clinicAnimal);
 		bool DeleteClinicAnimal(int id);
 
 		bool CreateClinicVisit(int id, ClinicVisit cv);
-		
-		
-
+		/*bool EditClinicAnimal(int id);*/
 	}
 }

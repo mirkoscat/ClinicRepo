@@ -26,8 +26,11 @@ namespace WebApp.Controllers
 		// GET: ClinicController
 		public ActionResult Index()
 		{
-			var list = _clinicService.GetClinicAnimals();
-			return View(list);
+			var list = _clinicService.GetClinicAnimals().ToList();
+			var model = new ClinicAnimalViewModel() {
+				ClinicAnimals = list
+			};
+			return View(model);
 		}
 
 		// GET: ClinicController/Create
@@ -111,7 +114,15 @@ namespace WebApp.Controllers
 				return RedirectToAction(nameof(Index));
 			return View();
 		}
+		// GET: ClinicController/EditCA/5
+		//public ActionResult EditCA(int id, ClinicAnimalViewModel updateClinicAnimal)
+		//{
+		//	var result = _clinicService.EditClinicAnimal(id,updateClinicAnimal);
+		//	if (result != false)
+		//		return RedirectToAction(nameof(Index));
+		//	return View(updateClinicAnimal);
+		//}
 
-		
+
 	}
 }

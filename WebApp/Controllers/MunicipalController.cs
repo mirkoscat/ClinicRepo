@@ -63,10 +63,7 @@ namespace WebApp.Controllers
                     DescriptionBeforeVisit = model.MunicipalVisit.DescriptionBeforeVisit,
                     Price=model.MunicipalVisit.Price,
                     Status=model.MunicipalVisit.Status,
-                    PaymentDate=model.MunicipalVisit.PaymentDate
-                    
-                    
-                 
+                    PaymentDate=model.MunicipalVisit.PaymentDate  
                 };
               
                _munService.CreateMunicipalVisit(animal.Id, x);

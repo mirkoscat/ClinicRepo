@@ -1,27 +1,28 @@
-﻿@using DataLayer;
+﻿
 
-@model IEnumerable<ClinicAnimal>
+@model WebApp.Models.ClinicAnimalViewModel
 
 <a asp-controller="Clinic" asp-action="Create" class="btn btn-primary">Create Clinic Animal</a>
 <a asp-controller="Municipal" asp-action="CreateMunAnimal" class="btn btn-primary">Create Municipal Animal</a>
 
 <h2>List of Clinic Animals</h2>
-@if (Model.Any())
+@if (Model.ClinicAnimals.Any())
 {
 	<div class="containeranimals py-3 px-3">
-		@foreach (var a in Model)
+		@foreach (var animal in Model.ClinicAnimals)
 		{
 			<div class="card" style="width: 18rem;margin-right:50px;margin-bottom:20px;">
 				@*<img class="card-img-top" src="@Url.Action("GetImage", "Municipal", new { id=a.Id })" alt="@a.Name">
 		*@<div class="card-body">
-					<h5 class="card-title">Name: @a.Name</h5>
-					<p class="card-text">Type: @a.Typology</p>
-					<p class="card-text">Chip: @a.MicrochipNumber</p>
-					<p class="card-text">Owner: @a.OwnerName @a.OwnerLastName</p>
+					<h5 class="card-title">Name: @animal.Name</h5>
+					<p class="card-text">Type: @animal.Typology</p>
+					<p class="card-text">Chip: @animal.MicrochipNumber</p>
+					<p class="card-text">Owner: @animal.OwnerName @animal.OwnerLastName</p>
 					<p>
-						@Html.ActionLink("Nuova Visita", "NewClinicVisit", "Clinic",new { id = a.Id }, new { @class = "btn btn-warning" })
-						@Html.ActionLink("Dettagli Visite", "CADetails", "Clinic",new { id = a.Id }, new { @class = "btn btn-warning" })
-						@Html.ActionLink("Delete", "Delete", "Clinic",new { id = a.Id }, new { @class = "btn btn-danger" })
+						@Html.ActionLink("New Visit", "NewClinicVisit", "Clinic",new { id = animal.Id }, new { @class = "btn btn-warning" })
+						@Html.ActionLink("Visit Details", "CADetails", "Clinic",new { id = animal.Id }, new { @class = "btn btn-warning" })
+						@Html.ActionLink("Edit ClinicAnimal", "EditCA", "Clinic",new { id = animal.Id }, new { @class = "btn btn-warning" })
+						@Html.ActionLink("Delete", "Delete", "Clinic",new { id = animal.Id }, new { @class = "btn btn-danger" })
 					</p>
 				</div>
 			</div>
