@@ -3,7 +3,7 @@
 <a asp-controller="Municipal" asp-action="CreateMunAnimal" class="btn btn-primary">Create Municipal Animal</a>
 @if (Model.Visits.Any())
 {<p>List of municipal visits with active recovery</p>
-	<div class="containeranimals  py-3 px-3">
+	<div class="containeranimals ">
 
 
 		@foreach (var visit in Model.Visits)
@@ -31,7 +31,7 @@ else
 
 @if (Model.Animals.Any())
 {<p>List of municipal animals :</p>
-	<div class="containeranimals  py-3 px-3">
+	<div class="containeranimals ">
 
 
 		@foreach (var a in Model.Animals)

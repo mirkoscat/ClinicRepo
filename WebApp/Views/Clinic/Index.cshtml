@@ -8,7 +8,8 @@
 <h2>List of Clinic Animals</h2>
 @if (Model.ClinicAnimals.Any())
 {
-	<div class="containeranimals py-3 px-3">
+	<div class="containeranimals ">
+		@*py-3 px-3*@
 		@foreach (var animal in Model.ClinicAnimals)
 		{
 			<div class="card" style="width: 18rem;margin-right:50px;margin-bottom:20px;">
@@ -21,7 +22,7 @@
 					<p>
 						@Html.ActionLink("New Visit", "NewClinicVisit", "Clinic",new { id = animal.Id }, new { @class = "btn btn-warning" })
 						@Html.ActionLink("Visit Details", "CADetails", "Clinic",new { id = animal.Id }, new { @class = "btn btn-warning" })
-						@Html.ActionLink("Edit ClinicAnimal", "EditCA", "Clinic",new { id = animal.Id }, new { @class = "btn btn-warning" })
+						@Html.ActionLink("Edit Visit", "EditCA", "Clinic",new { id = animal.Id }, new { @class = "btn btn-warning" })
 						@Html.ActionLink("Delete", "Delete", "Clinic",new { id = animal.Id }, new { @class = "btn btn-danger" })
 					</p>
 				</div>
