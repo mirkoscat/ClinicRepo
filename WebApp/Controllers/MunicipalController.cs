@@ -112,6 +112,7 @@ namespace WebApp.Controllers
             IsInHospital=updatedAnimal.MunicipalAnimal.IsInHospital,
             HasMicrochip=updatedAnimal.MunicipalAnimal.HasMicrochip,
             MicrochipNumber=updatedAnimal.MunicipalAnimal.MicrochipNumber
+            //,MunicipalVisits=_munService.GetMunicipalVisits(id)
             };
             var result = _munService.EditMunicipalAnimal(id, municipalAnimal);
             if (result != false)

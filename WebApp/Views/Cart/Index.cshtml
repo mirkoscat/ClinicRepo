@@ -28,7 +28,7 @@
 							<form asp-controller="Cart" asp-action="UpdateQuantity" method="POST">
 								<input type="hidden" name="id" asp-for="@p.Product.Id" id="id" />
 								<input type="number" placeholder="@p.Quantity" asp-for="@p.Quantity" id="qty" name="qty" min="0" />
-								<button type="submit" id="MyButtonUpdate" class="btn btn-success">Aggiorna</button>
+								<button type="submit" id="MyButtonUpdate" class="btn btn-info">Update</button>
 							</form>
 						</td>
 						<td>@p.Product.Price €</td>
@@ -45,13 +45,13 @@ else
 }
 <div class="container">
 	<form method="post" asp-controller="Cart" asp-action="CheckOut" enctype="multipart/form-data">
-		<label>Street</label>
+		<label asp-for="@Model.StreetName">Street</label>
 		<br />
-		<input type="text" required name="street"/>
+		<input type="text" required asp-for="@Model.StreetName"  name="street" />
 		<br />
 		<label>Prescription</label>
 		<br />
-		<input type="file" accept=".jpeg,.jpg,.png,.pdf" />
+		<input type="file" accept=".jpeg,.jpg,.png" />
 		<br />
 		<button class="btn btn-info">Checkout</button>
 	</form>

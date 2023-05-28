@@ -43,6 +43,7 @@ else
 					<h5 class="card-title">@a.Name</h5>
 					<p class="card-text">In Hospital? @a.IsInHospital</p>
 					<p>Microchip Number: @a.MicrochipNumber</p>
+					<p>@a.MunicipalVisits.FirstOrDefault()?.Status</p>
 					<p>
 						@Html.ActionLink("New Visit", "NewMunicipalVisit", "Municipal",new { id = a.Id }, new { @class = "btn btn-warning" })
 						@Html.ActionLink("Recoveries Details", "MADetails", "Municipal",new { id = a.Id }, new { @class = "btn btn-warning" })
