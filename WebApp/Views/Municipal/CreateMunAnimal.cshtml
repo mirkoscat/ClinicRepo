@@ -97,17 +97,6 @@
 </div>
 
 @section Scripts {
-    <script>
-        var hasMicrochipCheckbox = document.getElementById("HasMicrochip");
-        var showDiv = document.getElementById("showthings");
-
-        hasMicrochipCheckbox.addEventListener("click", function () {
-            if (hasMicrochipCheckbox.checked) {
-                showDiv.style.display = "block";
-            } else {
-                showDiv.style.display = "none";
-            }
-        });
-    </script>
+    <script src="~/js/microchip.js" asp-append-version="true"></script>
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
